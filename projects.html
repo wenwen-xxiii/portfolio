@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Projects — Wendell F. Rebusit</title>
+    <meta name="description"
+        content="Products, platforms, and operational systems architected and built by Wendell F. Rebusit.">
+    <meta name="theme-color" content="#0a0a0a">
+
+    <!-- Fonts: Geist, Geist Mono, Source Serif 4 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;600&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap"
+        rel="stylesheet">
+
+    <!-- Geist Pixel Font -->
+    <style>
+        @font-face {
+            font-family: 'Geist Pixel';
+            src: url('https://cdn.jsdelivr.net/gh/vercel/geist-pixel-font@main/fonts/webfonts/GeistPixel-Square.woff2') format('woff2');
+            font-display: swap;
+        }
+    </style>
+
+    <!-- Core Stylesheet -->
+    <link rel="stylesheet" href="styles.css?v=2">
+
+    <!-- Anti-Flash (FOUC) Theme Initializer: Runs synchronously before rendering -->
+    <script>
+        (function () {
+            try {
+                var pref = localStorage.getItem('theme_pref');
+                var isDark = pref === 'dark' || ((!pref || pref === 'system') && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+                if (isDark) {
+                    document.documentElement.classList.add('dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                }
+            } catch (e) { }
+        })();
+    </script>
+</head>
+
+<body>
+
+    <!-- Background Halftone Atmospheric Backdrop -->
+    <div aria-hidden="true" style="pointer-events: none; position: fixed; inset: 0; z-index: 0;">
+        <div class="halftone halftone-wide mask-tr"
+            style="position: absolute; right: 0; top: 0; height: 75vh; width: 68vw; opacity: 0.18;"></div>
+        <div class="halftone mask-bl"
+            style="position: absolute; bottom: 0; left: 0; height: 60vh; width: 55vw; opacity: 0.15;"></div>
+    </div>
+
+    <!-- ========================================================================
+       Fixed Left Sidebar (Desktop Viewports ≥ 1024px)
+       ======================================================================== -->
+    <aside class="layout-sidebar">
+        <a href="index.html" class="font-pixel"
+            style="font-size: 16px; font-weight: 600; letter-spacing: -0.01em;">Wendell F.
+            Rebusit</a>
+
+        <nav style="margin-top: 2rem; display: flex; flex-direction: column; gap: 0.75rem; flex: 1;">
+            <a href="projects.html" class="nav-link is-active" style="color: rgb(var(--ink)); font-weight: 600;">
+                <span style="display: inline-flex; align-items: center; gap: 6px;">
+                    <span style="font-size: 12px;">→</span>
+                    Projects
+                </span>
+            </a>
+            <a href="exp.html" class="nav-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7">
+                    <rect x="2" y="7" width="20" height="14" rx="2" />
+                    <path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2" />
+                </svg>
+                Experience
+            </a>
+            <a href="stack.html" class="nav-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                </svg>
+                Stack
+            </a>
+            <a href="cert.html" class="nav-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7">
+                    <circle cx="12" cy="8" r="6" />
+                    <path d="M15.5 14L18 22l-6-3-6 3 2.5-8" />
+                </svg>
+                Certifications
+            </a>
+            <a href="github.html" class="nav-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7">
+                    <path
+                        d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22" />
+                </svg>
+                GitHub
+            </a>
+
+        </nav>
+        <div style="margin-top: auto; width: 100%;">
+            <div class="sidebar-divider" style="margin-block: 0.8rem; margin-top: 0;"></div>
+
+            <!-- Command Shortcuts Trigger Buttons -->
+            <button type="button" onclick="openAsk()" class="nav-link"
+                style="font-size: 12px; color: rgb(var(--g400));">
+                <span>Ask anything</span>
+                <span style="display: inline-flex; align-items: center; gap: 2px; margin-left: auto;">
+                    <kbd class="ask-mod-key"
+                        style="padding: 1px 5px; border-radius: 4px; border: 1px solid rgb(var(--g300)); font-size: 10px; background: rgb(var(--g100));">⌘</kbd>
+                    <span style="font-size: 10px;">+</span>
+                    <kbd
+                        style="padding: 1px 5px; border-radius: 4px; border: 1px solid rgb(var(--g300)); font-size: 10px; background: rgb(var(--g100));">K</kbd>
+                </span>
+            </button>
+
+            <button type="button" onclick="openTyping()" class="nav-link"
+                style="font-size: 12px; color: rgb(var(--g400));">
+                <span>Typing test</span>
+                <span style="display: inline-flex; align-items: center; gap: 2px; margin-left: auto;">
+                    <kbd class="ask-mod-key"
+                        style="padding: 1px 5px; border-radius: 4px; border: 1px solid rgb(var(--g300)); font-size: 10px; background: rgb(var(--g100));">⌘</kbd>
+                    <span style="font-size: 10px;">+</span>
+                    <kbd
+                        style="padding: 1px 5px; border-radius: 4px; border: 1px solid rgb(var(--g300)); font-size: 10px; background: rgb(var(--g100));">J</kbd>
+                </span>
+            </button>
+
+            <!-- Live Active Visitors Pill -->
+            <div
+                style="margin-top: 1.25rem; padding-block: 0.9rem; border-top: 1px solid rgb(var(--g200)); border-bottom: 1px solid rgb(var(--g200));">
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                    <div class="presence-icons" style="display: flex; align-items: center;">
+                        <img src="assets/images/profile1.webp" alt="visitor"
+                            style="width:24px;height:24px;border-radius:50%;object-fit:cover;border:2px solid rgb(var(--bg));margin-left:-4px;">
+                        <img src="assets/images/profile2.webp" alt="visitor"
+                            style="width:24px;height:24px;border-radius:50%;object-fit:cover;border:2px solid rgb(var(--bg));margin-left:-8px;">
+                        <img src="assets/images/profile3.webp" alt="visitor"
+                            style="width:24px;height:24px;border-radius:50%;object-fit:cover;border:2px solid rgb(var(--bg));margin-left:-8px;">
+                        <span class="presence-more" data-presence-more>+5</span>
+                    </div>
+                    <span class="font-mono" style="font-size: 10.5px; color: rgb(var(--g400));">
+                        <b data-total-visits style="color: rgb(var(--ink)); font-weight: 700;">0</b> visits
+                    </span>
+                </div>
+                <p class="font-mono" style="font-size: 10.5px; color: rgb(var(--g400)); margin-top: 0.35rem;">
+                    <b data-live-visitors style="color: rgb(var(--ink)); font-weight: 700;">0</b> people viewing now
+                </p>
+            </div>
+
+            <!-- Sidebar Bottom: Theme switch, Sound toggle, and Contact -->
+            <div style="padding-top: 1rem;">
+                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;">
+                    <div class="theme-switch" role="group" aria-label="Theme switcher">
+                        <button type="button" data-theme-opt="system" onclick="setTheme('system', event)"
+                            class="theme-opt" title="System">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <rect x="3" y="4" width="18" height="13" rx="2" stroke="currentColor"
+                                    stroke-width="1.8" />
+                                <path d="M9 21h6M12 17v4" stroke="currentColor" stroke-width="1.8"
+                                    stroke-linecap="round" />
+                            </svg>
+                        </button>
+                        <button type="button" data-theme-opt="light" onclick="setTheme('light', event)"
+                            class="theme-opt" title="Light">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8" />
+                                <path
+                                    d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.4 1.4M17.6 17.6L19 19M19 5l-1.4 1.4M6.4 17.6L5 19"
+                                    stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                            </svg>
+                        </button>
+                        <button type="button" data-theme-opt="dark" onclick="setTheme('dark', event)" class="theme-opt"
+                            title="Dark">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M20 13.6A8 8 0 1 1 10.4 4a6.2 6.2 0 0 0 9.6 9.6z" stroke="currentColor"
+                                    stroke-width="1.8" stroke-linejoin="round" />
+                            </svg>
+                        </button>
+                    </div>
+
+                    <button type="button" onclick="window.siteSound.toggle()" data-sound-toggle class="sound-btn"
+                        aria-label="Toggle UI Sound" title="Sound toggle">
+                        <svg data-sound-on style="display: none; width: 14px; height: 14px;" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="1.8">
+                            <path d="M5 10v4h3l4 3V7L8 10H5zM16 9a4 4 0 010 6M18.5 6.5a7.5 7.5 0 010 11"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                        <svg data-sound-off style="display: inline-block; width: 14px; height: 14px;"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                            <path d="M5 10v4h3l4 3V7L8 10H5zM16 10l5 5M21 10l-5 5" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
+                    </button>
+                </div>
+
+                <p style="font-size: 11.5px; color: rgb(var(--g400)); line-height: 1.4;">Reach out for work &amp;
+                    collabs
+                </p>
+                <button type="button" onclick="openModal('email')" class="font-mono sidebar-email-btn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                        style="width: 13px; height: 13px;">
+                        <rect x="3" y="5" width="18" height="14" rx="2" />
+                        <path d="M4 7l8 6 8-6" />
+                    </svg>
+                    rebusitwendell@gmail.com
+                </button>
+            </div>
+    </aside>
+
+    <!-- Mobile Header Bar (< 1024px) -->
+    <header class="mobile-header">
+        <div class="mobile-header-inner">
+            <a href="index.html" class="font-pixel" style="font-size: 15px; font-weight: 600;">Wendell F. Rebusit</a>
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <button type="button" onclick="window.siteSound.toggle()" data-sound-toggle class="sound-btn"
+                    aria-label="Toggle sound">
+                    <svg data-sound-on style="display: none; width: 13px; height: 13px;" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="1.8">
+                        <path d="M5 10v4h3l4 3V7L8 10H5zM16 9a4 4 0 010 6" />
+                    </svg>
+                    <svg data-sound-off style="display: inline-block; width: 13px; height: 13px;" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="1.8">
+                        <path d="M5 10v4h3l4 3V7L8 10H5zM16 10l5 5M21 10l-5 5" />
+                    </svg>
+                </button>
+                <button type="button" onclick="openMobileNav()" aria-label="Open menu"
+                    style="padding: 4px; color: rgb(var(--ink));">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                        style="width: 22px; height: 22px;">
+                        <path d="M4 7h16M4 12h16M4 17h16" stroke-linecap="round" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Fullscreen Navigation Drawer -->
+    <div id="mobileNav">
+        <div
+            style="display: flex; align-items: center; justify-content: space-between; padding: 1rem 1.5rem; border-bottom: 1px solid rgb(var(--g200));">
+            <span class="font-pixel" style="font-size: 15px;">Wendell F. Rebusit</span>
+            <button type="button" onclick="closeMobileNav()" aria-label="Close menu" style="padding: 4px;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                    style="width: 20px; height: 20px;">
+                    <path d="M5 5l14 14M19 5L5 19" stroke-linecap="round" />
+                </svg>
+            </button>
+        </div>
+        <div style="padding: 2rem 1.5rem; display: flex; flex-direction: column; gap: 1.25rem;">
+            <a href="projects.html" onclick="closeMobileNav()" class="nav-link is-active"
+                style="font-size: 16px; color: rgb(var(--ink)); font-weight: 600;">→ Projects</a>
+            <a href="exp.html" onclick="closeMobileNav()" class="nav-link" style="font-size: 16px;">Experience</a>
+            <a href="stack.html" onclick="closeMobileNav()" class="nav-link" style="font-size: 16px;">Stack</a>
+            <a href="cert.html" onclick="closeMobileNav()" class="nav-link" style="font-size: 16px;">Certifications</a>
+            <a href="github.html" onclick="closeMobileNav()" class="nav-link" style="font-size: 16px;">GitHub</a>
+
+            <div class="sidebar-divider"></div>
+
+            <button type="button" onclick="closeMobileNav(); setTimeout(openAsk, 250);" class="nav-link"
+                style="font-size: 14px;">Ask anything (⌘K)</button>
+            <button type="button" onclick="closeMobileNav(); setTimeout(openTyping, 250);" class="nav-link"
+                style="font-size: 14px;">Typing test (⌘J)</button>
+
+            <div style="margin-top: 1.5rem;">
+                <p style="font-size: 12px; color: rgb(var(--g400));">Email me:</p>
+                <a href="mailto:rebusitwendell@gmail.com" class="font-mono"
+                    style="font-size: 14px; font-weight: 500; color: rgb(var(--ink));">rebusitwendell@gmail.com</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================================================
+       Main Content Area (Projects Feed)
+       ======================================================================== -->
+    <main id="top" class="layout-main">
+        <div class="container-inner">
+
+            <!-- Breadcrumb / Back Link -->
+            <div style="padding-top: 3.5rem; padding-bottom: 0.5rem;">
+                <a href="index.html" class="font-mono"
+                    style="display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: rgb(var(--g500));">
+                    <span>←</span> Back to Overview
+                </a>
+            </div>
+
+            <!-- Projects Feed Header -->
+            <section style="padding-top: 1.5rem; padding-bottom: 3rem;">
+                <div style="margin-bottom: 2.25rem;">
+                    <h1 class="font-pixel"
+                        style="font-size: clamp(2rem, 5vw, 2.75rem); line-height: 1.1; font-weight: 700; color: rgb(var(--ink));">
+                        projects
+                    </h1>
+                    <p
+                        style="margin-top: 0.75rem; font-size: 14px; color: rgb(var(--g600)); line-height: 1.6; max-width: 42rem;">
+                        Featured engineering work, platforms, and production systems I've built and architected.
+                    </p>
+                </div>
+
+                <!-- Clean Projects List -->
+                <div class="projects-feed">
+
+                    <!-- Project 1: Racitelcom -->
+                    <article class="project-item">
+                        <div class="project-top-row">
+                            <div class="project-logo-box" style="background: #ffffff;">
+                                <img src="assets/images/rctclogo11.webp" alt="Racitelcom Logo"
+                                    style="width: 100%; height: 100%; object-fit: contain; padding: 4px; filter: drop-shadow(0 1px 3px rgba(0,0,0,0.3));">
+                            </div>
+                            <div class="project-header-meta">
+                                <div class="project-badges">
+                                    <span class="badge-pill-bracket">
+                                        ‹ TELECOMMUNICATIONS &amp; ISP ›
+                                    </span>
+                                    <span class="badge-pill-subtle">LIVE PRODUCTION</span>
+                                </div>
+                                <h2 class="project-title">Racitelcom – ISP &amp; Telecom Portal</h2>
+                                <p class="project-desc">
+                                    An enterprise telecommunications and internet service provider management platform
+                                    featuring automated subscriber billing, online service provisioning, network
+                                    monitoring, and customer self-service portals.
+                                </p>
+
+                                <!-- Tech Stack Pills & Action -->
+                                <div
+                                    style="margin-top: 1.15rem; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.75rem;">
+                                    <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 6px;">
+                                        <span class="exp-skill-pill">Laravel</span>
+                                        <span class="exp-skill-pill">React</span>
+                                        <span class="exp-skill-pill">PostgreSQL</span>
+                                        <span class="exp-skill-pill">Nginx</span>
+                                        <span class="exp-skill-pill">MikroTik</span>
+                                    </div>
+                                    <a href="https://racitelcom.com/" target="_blank" rel="noopener"
+                                        class="cert-link-btn"
+                                        style="padding: 6px 14px; font-size: 11.5px; border-radius: 8px;">
+                                        <span>Visit Live Site</span>
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                                            style="width: 12px; height: 12px;">
+                                            <path
+                                                d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3" />
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 2: Xillafit -->
+                    <article class="project-item">
+                        <div class="project-top-row">
+                            <div class="project-logo-box" style="background: #ffffff;">
+                                <img src="assets/images/XillaLogo1.webp" alt="Xillafit Logo"
+                                    style="width: 100%; height: 100%; object-fit: contain; padding: 4px;">
+                            </div>
+                            <div class="project-header-meta">
+                                <div class="project-badges">
+                                    <span class="badge-pill-bracket">
+                                        ‹ FITNESS &amp; APPAREL ›
+                                    </span>
+                                    <span class="badge-pill-subtle">E-COMMERCE</span>
+                                </div>
+                                <h2 class="project-title">Xillafit – Athletic Activewear Experience</h2>
+                                <p class="project-desc">
+                                    Modern fitness and athletic apparel e-commerce web platform engineered for seamless
+                                    browsing, dynamic product catalogs, inventory management, and integrated checkout
+                                    payments.
+                                </p>
+
+                                <!-- Tech Stack Pills & Action -->
+                                <div
+                                    style="margin-top: 1.15rem; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.75rem;">
+                                    <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 6px;">
+                                        <span class="exp-skill-pill">Node.js</span>
+                                        <span class="exp-skill-pill">React</span>
+                                        <span class="exp-skill-pill">Tailwind CSS</span>
+                                        <span class="exp-skill-pill">Payment Gateways</span>
+                                    </div>
+                                    <a href="https://www.xillafit.com/" target="_blank" rel="noopener"
+                                        class="cert-link-btn"
+                                        style="padding: 6px 14px; font-size: 11.5px; border-radius: 8px;">
+                                        <span>Visit Live Site</span>
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                                            style="width: 12px; height: 12px;">
+                                            <path
+                                                d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3" />
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 3: PDM Student Enrollment System -->
+                    <article class="project-item">
+                        <div class="project-top-row">
+                            <div class="project-logo-box" style="background: #ffffff; padding: 3px;">
+                                <img src="assets/images/pdm.webp" alt="PDM Logo"
+                                    style="width: 100%; height: 100%; object-fit: contain; border-radius: 8px;">
+                            </div>
+                            <div class="project-header-meta">
+                                <div class="project-badges">
+                                    <span class="badge-pill-bracket">
+                                        ‹ ACADEMIC SYSTEM ›
+                                    </span>
+                                    <span class="badge-pill-subtle">INSTITUTIONAL SYSTEM</span>
+                                </div>
+                                <h2 class="project-title">PDM – Student Enrollment System</h2>
+                                <p class="project-desc">
+                                    Comprehensive institutional student information and enrollment system featuring
+                                    records management, curriculum tracking, student registration, course scheduling,
+                                    and grade encoding.
+                                </p>
+
+                                <!-- Tech Stack Pills & Action -->
+                                <div
+                                    style="margin-top: 1.15rem; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.75rem;">
+                                    <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 6px;">
+                                        <span class="exp-skill-pill">C#</span>
+                                        <span class="exp-skill-pill">.NET Framework</span>
+                                        <span class="exp-skill-pill">MySQL</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 4: PDM Document Request System -->
+                    <article class="project-item">
+                        <div class="project-top-row">
+                            <div class="project-logo-box" style="background: #ffffff; padding: 3px;">
+                                <img src="assets/images/pdm.webp" alt="PDM Logo"
+                                    style="width: 100%; height: 100%; object-fit: contain; border-radius: 8px;">
+                            </div>
+                            <div class="project-header-meta">
+                                <div class="project-badges">
+                                    <span class="badge-pill-bracket">
+                                        ‹ DOCUMENT AUTOMATION ›
+                                    </span>
+                                    <span class="badge-pill-subtle">PUBLIC REPOSITORY</span>
+                                </div>
+                                <h2 class="project-title">PDM – Document Request System</h2>
+                                <p class="project-desc">
+                                    An automated web portal streamlining student and alumni academic document requests
+                                    (transcripts, certifications, credentials) with digital request tracking, status
+                                    notifications, and administrative verification.
+                                </p>
+
+                                <!-- Tech Stack Pills & Action -->
+                                <div
+                                    style="margin-top: 1.15rem; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.75rem;">
+                                    <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 6px;">
+                                        <span class="exp-skill-pill">Python</span>
+                                        <span class="exp-skill-pill">MySQL</span>
+                                    </div>
+                                    <a href="https://github.com/wenwen-xxiii/PDM-DOCUMENT-REQUEST_SYSTEM"
+                                        target="_blank" rel="noopener" class="cert-link-btn"
+                                        style="padding: 6px 14px; font-size: 11.5px; border-radius: 8px;">
+                                        <span>View Repository</span>
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                                            style="width: 12px; height: 12px;">
+                                            <path
+                                                d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3" />
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                </div>
+            </section>
+
+            <!-- Bottom Atmospheric Fade -->
+            <div aria-hidden="true" class="halftone halftone-wide mask-fade-x"
+                style="height: 3rem; margin-top: 2rem; margin-bottom: 4rem; opacity: 0.2;"></div>
+
+        </div>
+    </main>
+
+    <!-- Modals & Overlays -->
+    <!-- Ask Overlay (⌘K / Alt+K) -->
+    <div id="askOverlay" role="dialog" aria-modal="true" aria-label="Ask Anything modal">
+        <div class="ask-backdrop" onclick="closeAsk()"></div>
+        <div class="ask-content">
+            <div class="ask-bubble" id="askBubble"><span id="askBubbleText"></span></div>
+            <div style="display: flex; align-items: center; gap: 12px;">
+                <label for="askInput" class="ask-title" style="display: block; margin: 0;">what do you want to ask?</label>
+            </div>
+            <div class="ask-field" onclick="document.getElementById('askInput').focus()">
+                <span id="askText"></span><span class="ask-caret"></span>
+            </div>
+            <input id="askInput" class="ask-hidden-input" type="text" autocomplete="off" spellcheck="false"
+                aria-label="Ask query">
+            <div class="font-mono" style="font-size: 11px; color: rgb(var(--g400)); display: flex; gap: 1rem;">
+                <span><kbd style="padding: 1px 5px; border: 1px solid rgb(var(--g300)); border-radius: 4px;">↵</kbd>
+                    submit</span>
+                <span><kbd style="padding: 1px 5px; border-radius: 4px; border: 1px solid rgb(var(--g300));">esc</kbd>
+                    close</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Generic Modal (Email) -->
+    <div id="modal" role="dialog" aria-modal="true">
+        <div class="modal-backdrop" onclick="closeModal()"></div>
+        <div class="modal-panel" data-panel="email">
+            <div style="display: flex; align-items: baseline; justify-content: space-between;">
+                <span class="font-mono" style="font-size: 11px; text-transform: uppercase; color: rgb(var(--g400));">Get
+                    in touch</span>
+                <button type="button" onclick="closeModal()"
+                    style="font-size: 16px; color: rgb(var(--g400));">×</button>
+            </div>
+            <h3 class="font-pixel" style="font-size: 20px; font-weight: 700; margin-top: 0.5rem;">Say Hello</h3>
+            <p style="font-size: 13.5px; color: rgb(var(--g500)); line-height: 1.5; margin-top: 0.5rem;">
+                For collaborations, engineering inquiries, or just to say hi — feel free to drop me a note!
+            </p>
+            <div
+                style="margin-top: 1.25rem; display: flex; align-items: center; gap: 8px; border: 1px solid rgb(var(--g200)); border-radius: 8px; padding: 6px 10px; background: rgb(var(--g50));">
+                <span class="font-mono"
+                    style="font-size: 13px; flex: 1; overflow: hidden; text-overflow: ellipsis;">rebusitwendell@gmail.com</span>
+                <button type="button" onclick="copyEmail(event, 'rebusitwendell@gmail.com')"
+                    style="padding: 4px 10px; border-radius: 6px; background: rgb(var(--ink)); color: rgb(var(--bg)); font-size: 11px; font-weight: 600;">Copy</button>
+            </div>
+            <a href="mailto:rebusitwendell@gmail.com"
+                style="display: block; width: 100%; text-align: center; margin-top: 0.75rem; padding: 8px; border: 1px solid rgb(var(--g300)); border-radius: 8px; font-size: 13px; font-weight: 500;">
+                Open Mail Client ↗
+            </a>
+        </div>
+    </div>
+
+    <!-- Engine Script -->
+    <script src="script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,22 @@
+# Dependencies
+node_modules/
+
+# Mac OS
+.DS_Store
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# Scratch / Temp files generated during development
+scratch/
+convert-webp.js
+
+# Environment variables (if any are added later)
+.env
+.env.local
+
+# Ignore unoptimized raw image formats (we use .webp)
+*.png
+*.jpg
+*.jpeg

@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Wendell Rebusit — Full-Stack Software Developer &amp; System Builder</title>
+  <meta name="description"
+    content="Full-Stack Software Developer, Lead Developer, IT/Network Technician, and System Builder. Building real-world web and mobile business applications.">
+  <meta name="theme-color" content="#0a0a0a">
+
+  <!-- Geist & Geist Mono fonts (Google Fonts) + Source Serif 4 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;600&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap"
+    rel="stylesheet">
+
+  <!-- Geist Pixel Font (Vercel via jsDelivr CDN) -->
+  <style>
+    @font-face {
+      font-family: 'Geist Pixel';
+      src: url('https://cdn.jsdelivr.net/gh/vercel/geist-pixel-font@main/fonts/webfonts/GeistPixel-Square.woff2') format('woff2');
+      font-display: swap;
+    }
+  </style>
+
+  <!-- Core Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Anti-Flash (FOUC) Theme Initializer: Runs synchronously before rendering -->
+  <script>
+    (function () {
+      try {
+        var pref = localStorage.getItem('theme_pref');
+        var isDark = pref === 'dark' || ((!pref || pref === 'system') && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        if (isDark) {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+      } catch (e) { }
+    })();
+  </script>
+</head>
+
+<body>
+
+  <!-- ========================================================================
+       Halftone Atmospheric Backdrop (Page-wide floating dot masks)
+       ======================================================================== -->
+  <div aria-hidden="true" style="pointer-events: none; position: fixed; inset: 0; z-index: 0;">
+    <div class="halftone halftone-wide mask-tr"
+      style="position: absolute; right: 0; top: 0; height: 75vh; width: 68vw; opacity: 0.18;"></div>
+    <div class="halftone mask-bl"
+      style="position: absolute; bottom: 0; left: 0; height: 60vh; width: 55vw; opacity: 0.15;"></div>
+  </div>
+
+  <!-- ========================================================================
+       Fixed Left Sidebar (Desktop Viewports ≥ 1024px)
+       ======================================================================== -->
+  <aside class="layout-sidebar">
+    <a href="#top" class="font-pixel" style="font-size: 16px; font-weight: 600; letter-spacing: -0.01em;">Wendell
+      Rebusit</a>
+
+    <nav style="margin-top: 2rem; display: flex; flex-direction: column; gap: 0.75rem; flex: 1;">
+      <a href="projects.html" class="nav-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7">
+          <rect x="3" y="3" width="18" height="18" rx="2" />
+          <path d="M9 3v18M3 9h18" />
+        </svg>
+        Projects
+      </a>
+      <a href="exp.html" class="nav-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7">
+          <rect x="2" y="7" width="20" height="14" rx="2" />
+          <path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2" />
+        </svg>
+        Experience
+      </a>
+      <a href="stack.html" class="nav-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7">
+          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+        </svg>
+        Stack
+      </a>
+      <a href="cert.html" class="nav-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7">
+          <circle cx="12" cy="8" r="6" />
+          <path d="M15.5 14L18 22l-6-3-6 3 2.5-8" />
+        </svg>
+        Certifications
+      </a>
+      <a href="github.html" class="nav-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7">
+          <path
+            d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22" />
+        </svg>
+        GitHub
+      </a>
+
+    </nav>
+    <div style="margin-top: auto; width: 100%;">
+      <div class="sidebar-divider" style="margin-block: 0.8rem; margin-top: 0;"></div>
+
+      <!-- Command Shortcuts Trigger Buttons -->
+      <button type="button" onclick="openAsk()" class="nav-link" style="font-size: 12px; color: rgb(var(--g400));">
+        <span>Ask anything</span>
+        <span style="display: inline-flex; align-items: center; gap: 2px; margin-left: auto;">
+          <kbd class="ask-mod-key"
+            style="padding: 1px 5px; border-radius: 4px; border: 1px solid rgb(var(--g300)); font-size: 10px; background: rgb(var(--g100));">⌘</kbd>
+          <span style="font-size: 10px;">+</span>
+          <kbd
+            style="padding: 1px 5px; border-radius: 4px; border: 1px solid rgb(var(--g300)); font-size: 10px; background: rgb(var(--g100));">K</kbd>
+        </span>
+      </button>
+
+      <button type="button" onclick="openTyping()" class="nav-link" style="font-size: 12px; color: rgb(var(--g400));">
+        <span>Typing test</span>
+        <span style="display: inline-flex; align-items: center; gap: 2px; margin-left: auto;">
+          <kbd class="ask-mod-key"
+            style="padding: 1px 5px; border-radius: 4px; border: 1px solid rgb(var(--g300)); font-size: 10px; background: rgb(var(--g100));">⌘</kbd>
+          <span style="font-size: 10px;">+</span>
+          <kbd
+            style="padding: 1px 5px; border-radius: 4px; border: 1px solid rgb(var(--g300)); font-size: 10px; background: rgb(var(--g100));">J</kbd>
+        </span>
+      </button>
+
+      <!-- Live Active Visitors Pill -->
+      <div
+        style="margin-top: 1.25rem; padding-block: 0.9rem; border-top: 1px solid rgb(var(--g200)); border-bottom: 1px solid rgb(var(--g200));">
+        <div style="display: flex; align-items: center; justify-content: space-between;">
+          <div class="presence-icons" style="display: flex; align-items: center;">
+            <img src="assets/images/profile1.webp" alt="visitor"
+              style="width:24px;height:24px;border-radius:50%;object-fit:cover;border:2px solid rgb(var(--bg));margin-left:-4px;">
+            <img src="assets/images/profile2.webp" alt="visitor"
+              style="width:24px;height:24px;border-radius:50%;object-fit:cover;border:2px solid rgb(var(--bg));margin-left:-8px;">
+            <img src="assets/images/profile3.webp" alt="visitor"
+              style="width:24px;height:24px;border-radius:50%;object-fit:cover;border:2px solid rgb(var(--bg));margin-left:-8px;">
+            <span class="presence-more" data-presence-more>+5</span>
+          </div>
+          <span class="font-mono" style="font-size: 10.5px; color: rgb(var(--g400));">
+            <b data-total-visits style="color: rgb(var(--ink)); font-weight: 700;">0</b> visits
+          </span>
+        </div>
+        <p class="font-mono" style="font-size: 10.5px; color: rgb(var(--g400)); margin-top: 0.35rem;">
+          <b data-live-visitors style="color: rgb(var(--ink)); font-weight: 700;">0</b> people viewing now
+        </p>
+      </div>
+
+      <!-- Sidebar Bottom: Theme switch, Sound toggle, and Contact -->
+      <div style="padding-top: 1rem;">
+        <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;">
+          <div class="theme-switch" role="group" aria-label="Theme switcher">
+            <button type="button" data-theme-opt="system" onclick="setTheme('system', event)" class="theme-opt"
+              title="System">
+              <svg viewBox="0 0 24 24" fill="none">
+                <rect x="3" y="4" width="18" height="13" rx="2" stroke="currentColor" stroke-width="1.8" />
+                <path d="M9 21h6M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+              </svg>
+            </button>
+            <button type="button" data-theme-opt="light" onclick="setTheme('light', event)" class="theme-opt"
+              title="Light">
+              <svg viewBox="0 0 24 24" fill="none">
+                <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8" />
+                <path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.4 1.4M17.6 17.6L19 19M19 5l-1.4 1.4M6.4 17.6L5 19"
+                  stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+              </svg>
+            </button>
+            <button type="button" data-theme-opt="dark" onclick="setTheme('dark', event)" class="theme-opt"
+              title="Dark">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M20 13.6A8 8 0 1 1 10.4 4a6.2 6.2 0 0 0 9.6 9.6z" stroke="currentColor" stroke-width="1.8"
+                  stroke-linejoin="round" />
+              </svg>
+            </button>
+          </div>
+
+          <button type="button" onclick="window.siteSound.toggle()" data-sound-toggle class="sound-btn"
+            aria-label="Toggle UI Sound" title="Sound toggle">
+            <svg data-sound-on style="display: none; width: 14px; height: 14px;" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="1.8">
+              <path d="M5 10v4h3l4 3V7L8 10H5zM16 9a4 4 0 010 6M18.5 6.5a7.5 7.5 0 010 11" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+            <svg data-sound-off style="display: inline-block; width: 14px; height: 14px;" viewBox="0 0 24 24"
+              fill="none" stroke="currentColor" stroke-width="1.8">
+              <path d="M5 10v4h3l4 3V7L8 10H5zM16 10l5 5M21 10l-5 5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </button>
+        </div>
+
+        <p style="font-size: 11.5px; color: rgb(var(--g400)); line-height: 1.4;">Reach out for work &amp; collabs</p>
+        <button type="button" onclick="openModal('email')" class="font-mono sidebar-email-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+            style="width: 13px; height: 13px;">
+            <rect x="3" y="5" width="18" height="14" rx="2" />
+            <path d="M4 7l8 6 8-6" />
+          </svg>
+          rebusitwendell@gmail.com
+        </button>
+      </div>
+  </aside>
+
+  <!-- ========================================================================
+       Mobile Header Bar (< 1024px)
+       ======================================================================== -->
+  <header class="mobile-header">
+    <div class="mobile-header-inner">
+      <a href="#top" class="font-pixel" style="font-size: 15px; font-weight: 600;">Wendell Rebusit</a>
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <button type="button" onclick="window.siteSound.toggle()" data-sound-toggle class="sound-btn"
+          aria-label="Toggle sound">
+          <svg data-sound-on style="display: none; width: 13px; height: 13px;" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="1.8">
+            <path d="M5 10v4h3l4 3V7L8 10H5zM16 9a4 4 0 010 6" />
+          </svg>
+          <svg data-sound-off style="display: inline-block; width: 13px; height: 13px;" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="1.8">
+            <path d="M5 10v4h3l4 3V7L8 10H5zM16 10l5 5M21 10l-5 5" />
+          </svg>
+        </button>
+        <button type="button" onclick="openMobileNav()" aria-label="Open menu"
+          style="padding: 4px; color: rgb(var(--ink));">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+            style="width: 22px; height: 22px;">
+            <path d="M4 7h16M4 12h16M4 17h16" stroke-linecap="round" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Fullscreen Navigation Drawer -->
+  <div id="mobileNav">
+    <div
+      style="display: flex; align-items: center; justify-content: space-between; padding: 1rem 1.5rem; border-bottom: 1px solid rgb(var(--g200));">
+      <span class="font-pixel" style="font-size: 15px;">Wendell Rebusit</span>
+      <button type="button" onclick="closeMobileNav()" aria-label="Close menu" style="padding: 4px;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+          style="width: 20px; height: 20px;">
+          <path d="M5 5l14 14M19 5L5 19" stroke-linecap="round" />
+        </svg>
+      </button>
+    </div>
+    <div style="padding: 2rem 1.5rem; display: flex; flex-direction: column; gap: 1.25rem;">
+      <a href="projects.html" onclick="closeMobileNav()" class="nav-link" style="font-size: 16px;">Projects</a>
+      <a href="exp.html" onclick="closeMobileNav()" class="nav-link" style="font-size: 16px;">Experience</a>
+      <a href="stack.html" onclick="closeMobileNav()" class="nav-link" style="font-size: 16px;">Stack</a>
+      <a href="cert.html" onclick="closeMobileNav()" class="nav-link" style="font-size: 16px;">Certifications</a>
+      <a href="github.html" onclick="closeMobileNav()" class="nav-link" style="font-size: 16px;">GitHub</a>
+
+      <div class="sidebar-divider"></div>
+
+      <button type="button" onclick="closeMobileNav(); setTimeout(openAsk, 250);" class="nav-link"
+        style="font-size: 14px;">Ask anything (⌘K)</button>
+      <button type="button" onclick="closeMobileNav(); setTimeout(openTyping, 250);" class="nav-link"
+        style="font-size: 14px;">Typing test (⌘J)</button>
+
+      <div style="margin-top: 1.5rem;">
+        <p style="font-size: 12px; color: rgb(var(--g400));">Email me:</p>
+        <a href="mailto:rebusitwendell@gmail.com" class="font-mono"
+          style="font-size: 14px; font-weight: 500; color: rgb(var(--ink));">rebusitwendell@gmail.com</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       Main Content Area
+       ======================================================================== -->
+  <main id="top" class="layout-main">
+    <div class="container-inner">
+
+      <!-- ── Section: Hero with Avatar Photo ── -->
+      <section style="padding-top: 4.5rem; padding-bottom: 3.5rem;">
+        <div
+          style="display: grid; gap: 2.25rem; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); align-items: center;">
+          <!-- Profile Picture -->
+          <div class="reveal d1">
+            <div class="gaze-avatar-wrap" style="max-width: 14rem;">
+              <img src="assets/images/pic-wen.webp" alt="Wendell Rebusit" class="gaze-canvas"
+                style="object-fit: cover; object-position: center top;" width="240" height="240">
+            </div>
+          </div>
+
+          <!-- Hero Bio & Details -->
+          <div>
+            <h1 class="reveal d2 font-pixel"
+              style="font-size: clamp(1.4rem, 3.2vw, 1.85rem); line-height: 1.2; font-weight: 700; letter-spacing: -0.01em;">
+              Wendell Rebusit
+            </h1>
+
+            <p class="reveal d3"
+              style="margin-top: 1.25rem; font-size: 15px; color: rgb(var(--g600)); line-height: 1.6;">
+              I'm a full-stack developer, lead engineer, and system builder. I specialize in building real-world web
+              &amp; mobile platforms, core business systems, and network infrastructure.
+            </p>
+
+            <p class="reveal d4"
+              style="margin-top: 0.85rem; font-size: 15px; color: rgb(var(--g600)); line-height: 1.6;">
+              Right now I'm building scalable business applications with Laravel, React, PostgreSQL, and MikroTik —
+              turning complex real-world operations into dependable software.
+            </p>
+
+            <!-- Social Links Row -->
+            <div class="reveal d5 font-mono"
+              style="margin-top: 1.5rem; display: flex; flex-wrap: wrap; gap: 1rem; font-size: 12.5px; color: rgb(var(--g500));">
+              <a href="https://github.com/wenwen-xxiii" target="_blank" rel="noopener"
+                style="display: inline-flex; align-items: center; gap: 3px;" class="nav-link">github ↗</a>
+              <a href="https://www.linkedin.com/in/wendell-rebusit-174198305/" target="_blank" rel="noopener"
+                style="display: inline-flex; align-items: center; gap: 3px;" class="nav-link">linkedin ↗</a>
+              <a href="https://www.facebook.com/wendzxxiii/" target="_blank" rel="noopener"
+                style="display: inline-flex; align-items: center; gap: 3px;" class="nav-link">facebook ↗</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ── Halftone Section Separator ── -->
+      <div aria-hidden="true" class="halftone halftone-wide mask-fade-x"
+        style="height: 1.5rem; margin-block: 1rem; opacity: 0.22;"></div>
+
+      <!-- ── Section 01: 3D Spotlight Projects Deck ── -->
+      <section id="projects" style="padding-block: 2.5rem;">
+        <div style="display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 2rem;">
+          <h2 class="font-pixel"
+            style="font-size: 14px; color: rgb(var(--g400)); text-transform: uppercase; letter-spacing: 0.05em;">01 —
+            Projects Spotlight</h2>
+          <div style="display: flex; align-items: center; gap: 14px;">
+            <a href="projects.html" class="font-mono"
+              style="font-size: 11px; text-transform: uppercase; color: rgb(var(--ink)); font-weight: 600;">All
+              Projects →</a>
+          </div>
+        </div>
+
+        <!-- 3D Card Deck Container -->
+        <div class="deck" data-deck>
+          <!-- Card 1: Racitelcom -->
+          <article class="deck-card is-center" role="button" tabindex="0" onclick="activateDeckCard(this)">
+            <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 6px;">
+              <span class="font-mono"
+                style="background: rgb(var(--ink)); color: rgb(var(--bg)); font-size: 9px; text-transform: uppercase; padding: 2px 8px; border-radius: 9999px; letter-spacing: 0.1em; font-weight: 600;">
+                ★ Telecommunications &amp; ISP
+              </span>
+              <span class="font-mono"
+                style="border: 1px solid rgb(var(--g300)); color: rgb(var(--g500)); font-size: 9px; text-transform: uppercase; padding: 2px 8px; border-radius: 9999px;">
+                Live Production
+              </span>
+            </div>
+
+            <div style="margin-top: 1rem; display: flex; align-items: center; gap: 12px;">
+              <div
+                style="width: 44px; height: 44px; border-radius: 12px; background: #ffffff; border: 1px solid rgb(var(--g200)); display: flex; align-items: center; justify-content: center; overflow: hidden; padding: 4px; box-shadow: 0 4px 10px rgba(0,0,0,0.06);">
+                <img src="assets/images/rctclogo11.webp" alt="Racitelcom logo"
+                  style="width: 100%; height: 100%; object-fit: contain;">
+              </div>
+              <h3 class="font-pixel" style="font-size: 16px; font-weight: 600;">Racitelcom</h3>
+            </div>
+
+            <p style="margin-top: 0.75rem; font-size: 13px; color: rgb(var(--g600)); line-height: 1.5;">
+              Telecom &amp; Internet service provider platform with subscriber billing, online services, customer
+              portal, and network management.
+            </p>
+
+            <div style="margin-top: 1rem; display: flex; flex-wrap: wrap; align-items: center; gap: 8px;">
+              <span class="font-mono"
+                style="font-size: 11px; padding: 3px 8px; border-radius: 6px; background: rgb(var(--g100)); color: rgb(var(--g700));">Laravel</span>
+              <span class="font-mono"
+                style="font-size: 11px; padding: 3px 8px; border-radius: 6px; background: rgb(var(--g100)); color: rgb(var(--g700));">React</span>
+              <span class="font-mono"
+                style="font-size: 11px; padding: 3px 8px; border-radius: 6px; background: rgb(var(--g100)); color: rgb(var(--g700));">PostgreSQL</span>
+              <a href="https://racitelcom.com/" target="_blank" rel="noopener"
+                style="margin-left: auto; font-size: 11px; font-weight: 600; color: rgb(var(--ink)); text-decoration: underline;"
+                onclick="event.stopPropagation()">Visit ↗</a>
+            </div>
+          </article>
+
+          <!-- Card 2: Xillafit -->
+          <article class="deck-card is-left" role="button" tabindex="0" onclick="activateDeckCard(this)">
+            <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 6px;">
+              <span class="font-mono"
+                style="background: rgb(var(--ink)); color: rgb(var(--bg)); font-size: 9px; text-transform: uppercase; padding: 2px 8px; border-radius: 9999px; letter-spacing: 0.1em; font-weight: 600;">
+                ★ Fitness &amp; Activewear
+              </span>
+              <span class="font-mono"
+                style="border: 1px solid rgb(var(--g300)); color: rgb(var(--g500)); font-size: 9px; text-transform: uppercase; padding: 2px 8px; border-radius: 9999px;">
+                E-Commerce
+              </span>
+            </div>
+
+            <div style="margin-top: 1rem; display: flex; align-items: center; gap: 12px;">
+              <div
+                style="width: 44px; height: 44px; border-radius: 12px; background: #ffffff; border: 1px solid rgb(var(--g200)); display: flex; align-items: center; justify-content: center; overflow: hidden; padding: 4px; box-shadow: 0 4px 10px rgba(0,0,0,0.06);">
+                <img src="assets/images/XillaLogo1.webp" alt="Xillafit logo"
+                  style="width: 100%; height: 100%; object-fit: contain;">
+              </div>
+              <h3 class="font-pixel" style="font-size: 16px; font-weight: 600;">Xillafit</h3>
+            </div>
+
+            <p style="margin-top: 0.75rem; font-size: 13px; color: rgb(var(--g600)); line-height: 1.5;">
+              Modern fitness and athletic apparel e-commerce experience featuring seamless checkout, product catalogs,
+              and payment gateway integration.
+            </p>
+
+            <div style="margin-top: 1rem; display: flex; flex-wrap: wrap; align-items: center; gap: 8px;">
+              <span class="font-mono"
+                style="font-size: 11px; padding: 3px 8px; border-radius: 6px; background: rgb(var(--g100)); color: rgb(var(--g700));">Node.js</span>
+              <span class="font-mono"
+                style="font-size: 11px; padding: 3px 8px; border-radius: 6px; background: rgb(var(--g100)); color: rgb(var(--g700));">React</span>
+              <span class="font-mono"
+                style="font-size: 11px; padding: 3px 8px; border-radius: 6px; background: rgb(var(--g100)); color: rgb(var(--g700));">Payment
+                Gateway</span>
+              <a href="https://www.xillafit.com/" target="_blank" rel="noopener"
+                style="margin-left: auto; font-size: 11px; font-weight: 600; color: rgb(var(--ink)); text-decoration: underline;"
+                onclick="event.stopPropagation()">Visit ↗</a>
+            </div>
+          </article>
+
+          <!-- Card 3: PDM Student Enrollment System -->
+          <article class="deck-card is-right" role="button" tabindex="0" onclick="activateDeckCard(this)">
+            <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 6px;">
+              <span class="font-mono"
+                style="background: rgb(var(--ink)); color: rgb(var(--bg)); font-size: 9px; text-transform: uppercase; padding: 2px 8px; border-radius: 9999px; letter-spacing: 0.1em; font-weight: 600;">
+                ★ Academic System
+              </span>
+              <span class="font-mono"
+                style="border: 1px solid rgb(var(--g300)); color: rgb(var(--g500)); font-size: 9px; text-transform: uppercase; padding: 2px 8px; border-radius: 9999px;">
+                Institutional
+              </span>
+            </div>
+
+            <div style="margin-top: 1rem; display: flex; align-items: center; gap: 12px;">
+              <div
+                style="width: 44px; height: 44px; border-radius: 12px; background: #ffffff; border: 1px solid rgb(var(--g200)); display: flex; align-items: center; justify-content: center; overflow: hidden; padding: 2px; box-shadow: 0 4px 10px rgba(0,0,0,0.06);">
+                <img src="assets/images/pdm.webp" alt="PDM Student Enrollment System logo"
+                  style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px;">
+              </div>
+              <h3 class="font-pixel" style="font-size: 16px; font-weight: 600;">PDM Student Enrollment System</h3>
+            </div>
+
+            <p style="margin-top: 0.75rem; font-size: 13px; color: rgb(var(--g600)); line-height: 1.5;">
+              Comprehensive institutional student enrollment system featuring student records management, course
+              scheduling, grade encoding, and student registration.
+            </p>
+
+            <div style="margin-top: 1rem; display: flex; flex-wrap: wrap; align-items: center; gap: 8px;">
+              <span class="font-mono"
+                style="font-size: 11px; padding: 3px 8px; border-radius: 6px; background: rgb(var(--g100)); color: rgb(var(--g700));">C#</span>
+              <span class="font-mono"
+                style="font-size: 11px; padding: 3px 8px; border-radius: 6px; background: rgb(var(--g100)); color: rgb(var(--g700));">.NET</span>
+              <span class="font-mono"
+                style="font-size: 11px; padding: 3px 8px; border-radius: 6px; background: rgb(var(--g100)); color: rgb(var(--g700));">MySQL</span>
+              <span class="font-mono"
+                style="font-size: 11px; padding: 3px 8px; border-radius: 6px; background: rgb(var(--g100)); color: rgb(var(--g700));">Enrollment
+                System</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- ── Section 02: Work Experience ── -->
+      <section id="experience" style="padding-block: 2.5rem; border-top: 1px solid rgb(var(--g200));">
+        <div style="display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 1.5rem;">
+          <h2 class="font-pixel" style="font-size: 14px; color: rgb(var(--g400)); text-transform: uppercase;">02 —
+            Experience</h2>
+          <span class="font-mono" style="font-size: 11px; color: rgb(var(--g500));">2022 — Present</span>
+        </div>
+
+        <div style="display: flex; flex-direction: column; border-top: 1px solid rgb(var(--g200));">
+          <!-- Job 1 -->
+          <div
+            style="display: grid; grid-template-columns: 5.5rem 1fr auto; align-items: baseline; gap: 1rem; padding-block: 0.95rem; border-bottom: 1px solid rgb(var(--g200));">
+            <span class="font-mono" style="font-size: 12px; color: rgb(var(--g400));">2025</span>
+            <span style="font-size: 14px; font-weight: 600;">Full-Stack Developer</span>
+            <span style="font-size: 13px; color: rgb(var(--g500));">Racitelcom Inc</span>
+          </div>
+
+          <!-- Job 2 -->
+          <div
+            style="display: grid; grid-template-columns: 5.5rem 1fr auto; align-items: baseline; gap: 1rem; padding-block: 0.95rem; border-bottom: 1px solid rgb(var(--g200));">
+            <span class="font-mono" style="font-size: 12px; color: rgb(var(--g400));">2022 — Present</span>
+            <span style="font-size: 14px; font-weight: 600;">Network Technician</span>
+            <span style="font-size: 13px; color: rgb(var(--g500));">Racitelcom Inc</span>
+          </div>
+        </div>
+
+        <!-- Tech Stack Badges -->
+        <div style="margin-top: 1.75rem;">
+          <h3 class="font-mono"
+            style="font-size: 11px; text-transform: uppercase; color: rgb(var(--g400)); margin-bottom: 0.75rem; letter-spacing: 0.1em;">
+            Core Technology Stack &amp; Skills</h3>
+          <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+            <span class="font-mono"
+              style="padding: 4px 10px; border-radius: 6px; border: 1px solid rgb(var(--g200)); background: rgb(var(--bg)); font-size: 12px;">C#
+              / .NET</span>
+            <span class="font-mono"
+              style="padding: 4px 10px; border-radius: 6px; border: 1px solid rgb(var(--g200)); background: rgb(var(--bg)); font-size: 12px;">Laravel</span>
+            <span class="font-mono"
+              style="padding: 4px 10px; border-radius: 6px; border: 1px solid rgb(var(--g200)); background: rgb(var(--bg)); font-size: 12px;">Node.js</span>
+            <span class="font-mono"
+              style="padding: 4px 10px; border-radius: 6px; border: 1px solid rgb(var(--g200)); background: rgb(var(--bg)); font-size: 12px;">React</span>
+            <span class="font-mono"
+              style="padding: 4px 10px; border-radius: 6px; border: 1px solid rgb(var(--g200)); background: rgb(var(--bg)); font-size: 12px;">PostgreSQL</span>
+            <span class="font-mono"
+              style="padding: 4px 10px; border-radius: 6px; border: 1px solid rgb(var(--g200)); background: rgb(var(--bg)); font-size: 12px;">MySQL</span>
+            <span class="font-mono"
+              style="padding: 4px 10px; border-radius: 6px; border: 1px solid rgb(var(--g200)); background: rgb(var(--bg)); font-size: 12px;">MikroTik
+              &amp; Networking</span>
+            <span class="font-mono"
+              style="padding: 4px 10px; border-radius: 6px; border: 1px solid rgb(var(--g200)); background: rgb(var(--bg)); font-size: 12px;">Payment
+              Integration</span>
+            <span class="font-mono"
+              style="padding: 4px 10px; border-radius: 6px; border: 1px solid rgb(var(--g200)); background: rgb(var(--bg)); font-size: 12px;">Billing
+              &amp; Ticketing Systems</span>
+            <span class="font-mono"
+              style="padding: 4px 10px; border-radius: 6px; border: 1px solid rgb(var(--g200)); background: rgb(var(--bg)); font-size: 12px;">System
+              Design</span>
+            <span class="font-mono"
+              style="padding: 4px 10px; border-radius: 6px; border: 1px solid rgb(var(--g200)); background: rgb(var(--bg)); font-size: 12px;">Cloud
+              &amp; Deployment</span>
+            <a href="stack.html" class="font-mono"
+              style="padding: 4px 10px; border-radius: 6px; border: 1px dashed rgb(var(--g300)); color: rgb(var(--g500)); font-size: 12px; text-decoration: none; transition: border-color 0.2s ease, color 0.2s ease;"
+              onmouseover="this.style.borderColor='rgb(var(--g500))';this.style.color='rgb(var(--ink))'"
+              onmouseout="this.style.borderColor='';this.style.color=''">+
+              more</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── Section 03: Certifications ── -->
+      <section id="certifications" style="padding-block: 2.5rem; border-top: 1px solid rgb(var(--g200));">
+        <div style="display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 1.5rem;">
+          <h2 class="font-pixel" style="font-size: 14px; color: rgb(var(--g400)); text-transform: uppercase;">03 —
+            Certifications</h2>
+          <div style="display: flex; align-items: center; gap: 14px;">
+            <a href="cert.html" class="font-mono"
+              style="font-size: 11px; text-transform: uppercase; color: rgb(var(--ink)); font-weight: 600;">
+              All Credentials →</a>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr)); gap: 0.85rem;">
+          <!-- Cert 1: AWS -->
+          <div
+            style="border: 1px solid rgb(var(--g200)); border-radius: 12px; padding: 1.35rem 1.2rem; text-align: center; background: rgb(var(--g50)); display: flex; flex-direction: column; align-items: center; justify-content: space-between;">
+            <div>
+              <div
+                style="width: 42px; height: 42px; border-radius: 10px; background: #232f3e; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.75rem; color: #ff9900; font-weight: 700; font-size: 13px; font-family: 'Geist Mono', monospace; letter-spacing: 0.05em; box-shadow: 0 4px 10px rgba(35,47,62,0.25);">
+                AWS
+              </div>
+              <h3 style="font-size: 13px; font-weight: 600; line-height: 1.35;">AWS Cloud Practitioner Essentials</h3>
+              <p class="font-mono"
+                style="font-size: 10px; text-transform: uppercase; color: rgb(var(--g400)); margin-top: 4px;">AWS
+                Training &amp; Certification</p>
+            </div>
+            <span class="font-mono"
+              style="display: inline-block; margin-top: 1rem; font-size: 9px; text-transform: uppercase; letter-spacing: 0.12em; color: rgb(var(--g500)); padding: 2px 8px; border-radius: 9999px; border: 1px solid rgb(var(--g200)); background: rgb(var(--bg));">
+              Completed · Nov 2025
+            </span>
+          </div>
+
+          <!-- Cert 2: Cisco -->
+          <div
+            style="border: 1px solid rgb(var(--g200)); border-radius: 12px; padding: 1.35rem 1.2rem; text-align: center; background: rgb(var(--g50)); display: flex; flex-direction: column; align-items: center; justify-content: space-between;">
+            <div>
+              <div
+                style="width: 42px; height: 42px; border-radius: 10px; background: #049fd9; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.75rem; color: #ffffff; font-weight: 700; font-size: 11px; font-family: 'Geist Mono', monospace; letter-spacing: 0.05em; box-shadow: 0 4px 10px rgba(4,159,217,0.25);">
+                CISCO
+              </div>
+              <h3 style="font-size: 13px; font-weight: 600; line-height: 1.35;">Networking Essentials</h3>
+              <p class="font-mono"
+                style="font-size: 10px; text-transform: uppercase; color: rgb(var(--g400)); margin-top: 4px;">Cisco
+                Networking Academy</p>
+            </div>
+            <span class="font-mono"
+              style="display: inline-block; margin-top: 1rem; font-size: 9px; text-transform: uppercase; letter-spacing: 0.12em; color: rgb(var(--g500)); padding: 2px 8px; border-radius: 9999px; border: 1px solid rgb(var(--g200)); background: rgb(var(--bg));">
+              Verified Credential
+            </span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── Section 04: Halftone GitHub Activity Map ── -->
+      <section id="github" style="padding-block: 2.5rem; border-top: 1px solid rgb(var(--g200));">
+        <div style="display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 1.25rem;">
+          <h2 class="font-pixel" style="font-size: 14px; color: rgb(var(--g400)); text-transform: uppercase;">04 —
+            GitHub Contributions</h2>
+          <a href="https://github.com/wenwen-xxiii" target="_blank" rel="noopener" class="font-mono"
+            style="font-size: 11px; color: rgb(var(--g500));">@wenwen-xxiii ↗</a>
+        </div>
+
+        <a href="github.html"
+          style="display: block; border: 1px solid rgb(var(--g200)); border-radius: 12px; padding: 1.25rem; background: rgb(var(--g50)); width: 100%;"
+          title="View Wendell's GitHub Profile">
+          <!-- Full 53-week x 7-day GitHub Contribution Matrix -->
+          <svg id="githubGraph" viewBox="0 0 765 118" class="h-auto w-full"
+            style="width: 100%; height: auto; display: block;" preserveAspectRatio="xMidYMid meet">
+            <!-- Dynamically populated via generateGithubMatrix() -->
+          </svg>
+        </a>
+        <p class="font-mono"
+          style="margin-top: 0.85rem; font-size: 11px; text-transform: uppercase; color: rgb(var(--g400)); letter-spacing: 0.08em;">
+          1,019 contributions in the last year
+        </p>
+      </section>
+
+      <!-- Bottom Atmospheric Fade -->
+      <div aria-hidden="true" class="halftone halftone-wide mask-fade-x"
+        style="height: 3rem; margin-top: 2rem; margin-bottom: 4rem; opacity: 0.2;"></div>
+
+    </div>
+  </main>
+
+  <!-- ========================================================================
+       Terminal "Ask Anything" Overlay (⌘K / Alt+K)
+       ======================================================================== -->
+  <div id="askOverlay" role="dialog" aria-modal="true" aria-label="Ask Anything modal">
+    <div class="ask-backdrop" onclick="closeAsk()"></div>
+    <div class="ask-content">
+      <div class="ask-bubble" id="askBubble"><span id="askBubbleText"></span></div>
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <label for="askInput" class="ask-title" style="display: block; margin: 0;">what do you want to ask?</label>
+      </div>
+      <div class="ask-field" onclick="document.getElementById('askInput').focus()">
+        <span id="askText"></span><span class="ask-caret"></span>
+      </div>
+      <input id="askInput" class="ask-hidden-input" type="text" autocomplete="off" spellcheck="false"
+        aria-label="Ask query">
+      <div class="font-mono" style="font-size: 11px; color: rgb(var(--g400)); display: flex; gap: 1rem;">
+        <span><kbd style="padding: 1px 5px; border: 1px solid rgb(var(--g300)); border-radius: 4px;">↵</kbd>
+          submit</span>
+        <span><kbd style="padding: 1px 5px; border: 1px solid rgb(var(--g300)); border-radius: 4px;">esc</kbd>
+          close</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       Interactive Typing Speed Test Overlay (⌘J / Alt+J)
+       ======================================================================== -->
+  <div id="typingOverlay" role="dialog" aria-modal="true" aria-label="Typing test modal">
+    <div class="tt-backdrop" onclick="closeTyping()"></div>
+    <div class="tt-content">
+      <!-- Live Metrics Header -->
+      <div class="tt-stats">
+        <div class="tt-stat">
+          <span class="tt-stat-val"><span id="ttWpm">0</span></span>
+          <span class="tt-stat-label">wpm</span>
+        </div>
+        <div class="tt-stat">
+          <span class="tt-stat-val"><span id="ttAcc">100</span><i>%</i></span>
+          <span class="tt-stat-label">acc</span>
+        </div>
+        <div class="tt-stat">
+          <span class="tt-stat-val"><span id="ttTime">0</span><i>s</i></span>
+          <span class="tt-stat-label">time</span>
+        </div>
+      </div>
+
+      <!-- Words Passage -->
+      <div class="tt-words-wrap">
+        <div class="tt-words" id="ttWords"></div>
+      </div>
+
+      <!-- Interactive On-Screen Virtual Keyboard -->
+      <div class="tt-keyboard" id="ttKeyboard"></div>
+
+      <!-- Footer Hints -->
+      <div class="font-mono" style="font-size: 11px; color: rgb(var(--g400)); display: flex; gap: 1.5rem;">
+        <span><kbd
+            style="padding: 1px 6px; border: 1px solid rgb(var(--g300)); border-radius: 4px; background: rgb(var(--g100));">tab</kbd>
+          restart</span>
+        <span><kbd
+            style="padding: 1px 6px; border: 1px solid rgb(var(--g300)); border-radius: 4px; background: rgb(var(--g100));">esc</kbd>
+          close</span>
+      </div>
+
+      <!-- Completion Results Scorecard -->
+      <div class="tt-results">
+        <div style="text-align: center;">
+          <span class="tt-res-wpm" id="ttResWpm">0</span>
+          <div class="font-mono"
+            style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.15em; color: rgb(var(--g400)); margin-top: 4px;">
+            Words per minute</div>
+        </div>
+        <div class="tt-res-grid">
+          <div>
+            <b><span id="ttResAcc">100</span><i>%</i></b>
+            <label>accuracy</label>
+          </div>
+          <div>
+            <b><span id="ttResRaw">0</span></b>
+            <label>raw wpm</label>
+          </div>
+          <div>
+            <b><span id="ttResTime">0</span><i>s</i></b>
+            <label>time elapsed</label>
+          </div>
+        </div>
+        <button type="button" class="tt-restart" onclick="ttRestart()">↻ Try again</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       Generic Modal Panels (Email, Community, Hackathons)
+       ======================================================================== -->
+  <div id="modal" role="dialog" aria-modal="true">
+    <div class="modal-backdrop" onclick="closeModal()"></div>
+
+    <!-- Email Modal Panel -->
+    <div class="modal-panel" data-panel="email">
+      <div style="display: flex; align-items: baseline; justify-content: space-between;">
+        <span class="font-mono" style="font-size: 11px; text-transform: uppercase; color: rgb(var(--g400));">Get in
+          touch</span>
+        <button type="button" onclick="closeModal()" style="font-size: 16px; color: rgb(var(--g400));">×</button>
+      </div>
+      <h3 class="font-pixel" style="font-size: 20px; font-weight: 700; margin-top: 0.5rem;">Say Hello</h3>
+      <p style="font-size: 14px; color: rgb(var(--g600)); margin-top: 0.5rem; line-height: 1.5;">
+        For collaborations, engineering inquiries, or just to say hi — feel free to drop me a note!
+      </p>
+      <div
+        style="margin-top: 1.25rem; display: flex; align-items: center; gap: 8px; border: 1px solid rgb(var(--g200)); border-radius: 8px; padding: 6px 10px; background: rgb(var(--g50));">
+        <span class="font-mono"
+          style="font-size: 13px; flex: 1; overflow: hidden; text-overflow: ellipsis;">rebusitwendell@gmail.com</span>
+        <button type="button" onclick="copyEmail(event, 'rebusitwendell@gmail.com')"
+          style="padding: 4px 10px; border-radius: 6px; background: rgb(var(--ink)); color: rgb(var(--bg)); font-size: 11px; font-weight: 600;">Copy</button>
+      </div>
+      <a href="mailto:rebusitwendell@gmail.com"
+        style="display: block; width: 100%; text-align: center; margin-top: 0.75rem; padding: 8px; border: 1px solid rgb(var(--g300)); border-radius: 8px; font-size: 13px; font-weight: 500;">
+        Open Mail Client ↗
+      </a>
+    </div>
+
+    <!-- Community Modal Panel -->
+    <div class="modal-panel" data-panel="community" style="display: none;">
+      <div style="display: flex; align-items: baseline; justify-content: space-between;">
+        <span class="font-mono"
+          style="font-size: 11px; text-transform: uppercase; color: rgb(var(--g400));">Community</span>
+        <button type="button" onclick="closeModal()" style="font-size: 16px; color: rgb(var(--g400));">×</button>
+      </div>
+      <h3 class="font-pixel" style="font-size: 20px; font-weight: 700; margin-top: 0.5rem;">300K+ Strong</h3>
+      <p style="font-size: 14px; color: rgb(var(--g600)); margin-top: 0.5rem; line-height: 1.5;">
+        Educational content, technical tutorials, and developer communities founded across the Philippines &amp;
+        globally.
+      </p>
+      <div style="margin-top: 1.25rem; display: flex; flex-direction: column; gap: 8px;">
+        <a href="https://youtube.com/@bryllimyt" target="_blank" rel="noopener"
+          style="display: flex; justify-content: space-between; padding: 10px 12px; border: 1px solid rgb(var(--g200)); border-radius: 8px; font-size: 13px;">
+          <span>YouTube Channel</span>
+          <span class="font-mono" style="color: rgb(var(--g400));">@bryllimyt ↗</span>
+        </a>
+        <a href="https://tiktok.com/@bryllim" target="_blank" rel="noopener"
+          style="display: flex; justify-content: space-between; padding: 10px 12px; border: 1px solid rgb(var(--g200)); border-radius: 8px; font-size: 13px;">
+          <span>TikTok Tech Content</span>
+          <span class="font-mono" style="color: rgb(var(--g400));">@bryllim ↗</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Hackathons Modal Panel -->
+    <div class="modal-panel" data-panel="hackathons" style="display: none;">
+      <div style="display: flex; align-items: baseline; justify-content: space-between;">
+        <span class="font-mono"
+          style="font-size: 11px; text-transform: uppercase; color: rgb(var(--g400));">Hackathons</span>
+        <button type="button" onclick="closeModal()" style="font-size: 16px; color: rgb(var(--g400));">×</button>
+      </div>
+      <h3 class="font-pixel" style="font-size: 20px; font-weight: 700; margin-top: 0.5rem;">10x Champion</h3>
+      <p style="font-size: 14px; color: rgb(var(--g600)); margin-top: 0.5rem; line-height: 1.5;">
+        Competitive builder across global and national innovation challenges.
+      </p>
+      <div
+        style="margin-top: 1rem; display: flex; flex-direction: column; gap: 8px; max-height: 240px; overflow-y: auto;">
+        <div style="padding: 8px 10px; border: 1px solid rgb(var(--g200)); border-radius: 8px;">
+          <div style="display: flex; justify-content: space-between; font-size: 13px; font-weight: 600;">
+            <span>National DICT eGov Hackathon</span>
+            <span class="font-mono" style="font-size: 10px; color: #10b981;">CHAMPION</span>
+          </div>
+          <div class="font-mono" style="font-size: 10px; color: rgb(var(--g400)); margin-top: 2px;">2026 · National
+            Level</div>
+        </div>
+        <div style="padding: 8px 10px; border: 1px solid rgb(var(--g200)); border-radius: 8px;">
+          <div style="display: flex; justify-content: space-between; font-size: 13px; font-weight: 600;">
+            <span>Google I/O Gemini Hackathon</span>
+            <span class="font-mono" style="font-size: 10px; color: #6366f1;">FINALIST</span>
+          </div>
+          <div class="font-mono" style="font-size: 10px; color: rgb(var(--g400)); margin-top: 2px;">Google Cloud AI
+          </div>
+        </div>
+        <div style="padding: 8px 10px; border: 1px solid rgb(var(--g200)); border-radius: 8px;">
+          <div style="display: flex; justify-content: space-between; font-size: 13px; font-weight: 600;">
+            <span>CodeBreak 2.0 AI Challenge</span>
+            <span class="font-mono" style="font-size: 10px; color: #10b981;">CHAMPION</span>
+          </div>
+          <div class="font-mono" style="font-size: 10px; color: rgb(var(--g400)); margin-top: 2px;">Tenext.ai</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Engine Script -->
+  <script src="script.js"></script>
+</body>
+
+</html>
