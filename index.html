@@ -42,6 +42,8 @@
       } catch (e) { }
     })();
   </script>
+
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 </head>
 
 <body>
@@ -60,38 +62,40 @@
        Fixed Left Sidebar (Desktop Viewports ≥ 1024px)
        ======================================================================== -->
   <aside class="layout-sidebar">
-    <a href="#top" class="font-pixel" style="font-size: 16px; font-weight: 600; letter-spacing: -0.01em;">Wendell
-      Rebusit</a>
+    <a href="#top" class="font-pixel" style="display: flex; align-items: center; gap: 8px; font-size: 16px; font-weight: 600; letter-spacing: -0.01em;">
+      <img src="assets/images/wen-logo.jpg" alt="Logo" style="width: 24px; height: 24px; border-radius: 50%; object-fit: cover;">
+      Wendell Rebusit
+    </a>
 
     <nav style="margin-top: 2rem; display: flex; flex-direction: column; gap: 0.75rem; flex: 1;">
-      <a href="projects.html" class="nav-link">
+      <a href="/projects" class="nav-link">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7">
           <rect x="3" y="3" width="18" height="18" rx="2" />
           <path d="M9 3v18M3 9h18" />
         </svg>
         Projects
       </a>
-      <a href="exp.html" class="nav-link">
+      <a href="/exp" class="nav-link">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7">
           <rect x="2" y="7" width="20" height="14" rx="2" />
           <path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2" />
         </svg>
         Experience
       </a>
-      <a href="stack.html" class="nav-link">
+      <a href="/stack" class="nav-link">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7">
           <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
         </svg>
         Stack
       </a>
-      <a href="cert.html" class="nav-link">
+      <a href="/cert" class="nav-link">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7">
           <circle cx="12" cy="8" r="6" />
           <path d="M15.5 14L18 22l-6-3-6 3 2.5-8" />
         </svg>
         Certifications
       </a>
-      <a href="github.html" class="nav-link">
+      <a href="/github" class="nav-link">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7">
           <path
             d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22" />
@@ -207,7 +211,10 @@
        ======================================================================== -->
   <header class="mobile-header">
     <div class="mobile-header-inner">
-      <a href="#top" class="font-pixel" style="font-size: 15px; font-weight: 600;">Wendell Rebusit</a>
+      <a href="#top" class="font-pixel" style="display: flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 600;">
+        <img src="assets/images/wen-logo.jpg" alt="Logo" style="width: 20px; height: 20px; border-radius: 50%; object-fit: cover;">
+        Wendell Rebusit
+      </a>
       <div style="display: flex; align-items: center; gap: 10px;">
         <button type="button" onclick="window.siteSound.toggle()" data-sound-toggle class="sound-btn"
           aria-label="Toggle sound">
@@ -235,7 +242,10 @@
   <div id="mobileNav">
     <div
       style="display: flex; align-items: center; justify-content: space-between; padding: 1rem 1.5rem; border-bottom: 1px solid rgb(var(--g200));">
-      <span class="font-pixel" style="font-size: 15px;">Wendell Rebusit</span>
+      <span class="font-pixel" style="display: flex; align-items: center; gap: 8px; font-size: 15px;">
+        <img src="assets/images/wen-logo.jpg" alt="Logo" style="width: 20px; height: 20px; border-radius: 50%; object-fit: cover;">
+        Wendell Rebusit
+      </span>
       <button type="button" onclick="closeMobileNav()" aria-label="Close menu" style="padding: 4px;">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
           style="width: 20px; height: 20px;">
@@ -244,11 +254,11 @@
       </button>
     </div>
     <div style="padding: 2rem 1.5rem; display: flex; flex-direction: column; gap: 1.25rem;">
-      <a href="projects.html" onclick="closeMobileNav()" class="nav-link" style="font-size: 16px;">Projects</a>
-      <a href="exp.html" onclick="closeMobileNav()" class="nav-link" style="font-size: 16px;">Experience</a>
-      <a href="stack.html" onclick="closeMobileNav()" class="nav-link" style="font-size: 16px;">Stack</a>
-      <a href="cert.html" onclick="closeMobileNav()" class="nav-link" style="font-size: 16px;">Certifications</a>
-      <a href="github.html" onclick="closeMobileNav()" class="nav-link" style="font-size: 16px;">GitHub</a>
+      <a href="/projects" onclick="closeMobileNav()" class="nav-link" style="font-size: 16px;">Projects</a>
+      <a href="/exp" onclick="closeMobileNav()" class="nav-link" style="font-size: 16px;">Experience</a>
+      <a href="/stack" onclick="closeMobileNav()" class="nav-link" style="font-size: 16px;">Stack</a>
+      <a href="/cert" onclick="closeMobileNav()" class="nav-link" style="font-size: 16px;">Certifications</a>
+      <a href="/github" onclick="closeMobileNav()" class="nav-link" style="font-size: 16px;">GitHub</a>
 
       <div class="sidebar-divider"></div>
 
@@ -328,7 +338,7 @@
             style="font-size: 14px; color: rgb(var(--g400)); text-transform: uppercase; letter-spacing: 0.05em;">01 —
             Projects Spotlight</h2>
           <div style="display: flex; align-items: center; gap: 14px;">
-            <a href="projects.html" class="font-mono"
+            <a href="/projects" class="font-mono"
               style="font-size: 11px; text-transform: uppercase; color: rgb(var(--ink)); font-weight: 600;">All
               Projects →</a>
           </div>
@@ -519,7 +529,7 @@
             <span class="font-mono"
               style="padding: 4px 10px; border-radius: 6px; border: 1px solid rgb(var(--g200)); background: rgb(var(--bg)); font-size: 12px;">Cloud
               &amp; Deployment</span>
-            <a href="stack.html" class="font-mono"
+            <a href="/stack" class="font-mono"
               style="padding: 4px 10px; border-radius: 6px; border: 1px dashed rgb(var(--g300)); color: rgb(var(--g500)); font-size: 12px; text-decoration: none; transition: border-color 0.2s ease, color 0.2s ease;"
               onmouseover="this.style.borderColor='rgb(var(--g500))';this.style.color='rgb(var(--ink))'"
               onmouseout="this.style.borderColor='';this.style.color=''">+
@@ -534,7 +544,7 @@
           <h2 class="font-pixel" style="font-size: 14px; color: rgb(var(--g400)); text-transform: uppercase;">03 —
             Certifications</h2>
           <div style="display: flex; align-items: center; gap: 14px;">
-            <a href="cert.html" class="font-mono"
+            <a href="/cert" class="font-mono"
               style="font-size: 11px; text-transform: uppercase; color: rgb(var(--ink)); font-weight: 600;">
               All Credentials →</a>
           </div>
@@ -590,7 +600,7 @@
             style="font-size: 11px; color: rgb(var(--g500));">@wenwen-xxiii ↗</a>
         </div>
 
-        <a href="github.html"
+        <a href="/github"
           style="display: block; border: 1px solid rgb(var(--g200)); border-radius: 12px; padding: 1.25rem; background: rgb(var(--g50)); width: 100%;"
           title="View Wendell's GitHub Profile">
           <!-- Full 53-week x 7-day GitHub Contribution Matrix -->

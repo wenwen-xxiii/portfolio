@@ -42,6 +42,8 @@
             } catch (e) { }
         })();
     </script>
+
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 </head>
 
 <body>
@@ -58,38 +60,38 @@
        Fixed Left Sidebar (Desktop Viewports ≥ 1024px)
        ======================================================================== -->
     <aside class="layout-sidebar">
-        <a href="index.html" class="font-pixel"
+        <a href="/" class="font-pixel"
             style="font-size: 16px; font-weight: 600; letter-spacing: -0.01em;">Wendell F.
             Rebusit</a>
 
         <nav style="margin-top: 2rem; display: flex; flex-direction: column; gap: 0.75rem; flex: 1;">
-            <a href="projects.html" class="nav-link is-active" style="color: rgb(var(--ink)); font-weight: 600;">
+            <a href="/projects" class="nav-link is-active" style="color: rgb(var(--ink)); font-weight: 600;">
                 <span style="display: inline-flex; align-items: center; gap: 6px;">
                     <span style="font-size: 12px;">→</span>
                     Projects
                 </span>
             </a>
-            <a href="exp.html" class="nav-link">
+            <a href="/exp" class="nav-link">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7">
                     <rect x="2" y="7" width="20" height="14" rx="2" />
                     <path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2" />
                 </svg>
                 Experience
             </a>
-            <a href="stack.html" class="nav-link">
+            <a href="/stack" class="nav-link">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7">
                     <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
                 </svg>
                 Stack
             </a>
-            <a href="cert.html" class="nav-link">
+            <a href="/cert" class="nav-link">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7">
                     <circle cx="12" cy="8" r="6" />
                     <path d="M15.5 14L18 22l-6-3-6 3 2.5-8" />
                 </svg>
                 Certifications
             </a>
-            <a href="github.html" class="nav-link">
+            <a href="/github" class="nav-link">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7">
                     <path
                         d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22" />
@@ -211,7 +213,10 @@
     <!-- Mobile Header Bar (< 1024px) -->
     <header class="mobile-header">
         <div class="mobile-header-inner">
-            <a href="index.html" class="font-pixel" style="font-size: 15px; font-weight: 600;">Wendell F. Rebusit</a>
+            <a href="/" class="font-pixel" style="display: flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 600;">
+        <img src="assets/images/wen-logo.jpg" alt="Logo" style="width: 20px; height: 20px; border-radius: 50%; object-fit: cover;">
+        Wendell F. Rebusit
+      </a>
             <div style="display: flex; align-items: center; gap: 10px;">
                 <button type="button" onclick="window.siteSound.toggle()" data-sound-toggle class="sound-btn"
                     aria-label="Toggle sound">
@@ -239,7 +244,10 @@
     <div id="mobileNav">
         <div
             style="display: flex; align-items: center; justify-content: space-between; padding: 1rem 1.5rem; border-bottom: 1px solid rgb(var(--g200));">
-            <span class="font-pixel" style="font-size: 15px;">Wendell F. Rebusit</span>
+            <span class="font-pixel" style="display: flex; align-items: center; gap: 8px; font-size: 15px;">
+        <img src="assets/images/wen-logo.jpg" alt="Logo" style="width: 20px; height: 20px; border-radius: 50%; object-fit: cover;">
+        Wendell F. Rebusit
+      </span>
             <button type="button" onclick="closeMobileNav()" aria-label="Close menu" style="padding: 4px;">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
                     style="width: 20px; height: 20px;">
@@ -248,12 +256,12 @@
             </button>
         </div>
         <div style="padding: 2rem 1.5rem; display: flex; flex-direction: column; gap: 1.25rem;">
-            <a href="projects.html" onclick="closeMobileNav()" class="nav-link is-active"
+            <a href="/projects" onclick="closeMobileNav()" class="nav-link is-active"
                 style="font-size: 16px; color: rgb(var(--ink)); font-weight: 600;">→ Projects</a>
-            <a href="exp.html" onclick="closeMobileNav()" class="nav-link" style="font-size: 16px;">Experience</a>
-            <a href="stack.html" onclick="closeMobileNav()" class="nav-link" style="font-size: 16px;">Stack</a>
-            <a href="cert.html" onclick="closeMobileNav()" class="nav-link" style="font-size: 16px;">Certifications</a>
-            <a href="github.html" onclick="closeMobileNav()" class="nav-link" style="font-size: 16px;">GitHub</a>
+            <a href="/exp" onclick="closeMobileNav()" class="nav-link" style="font-size: 16px;">Experience</a>
+            <a href="/stack" onclick="closeMobileNav()" class="nav-link" style="font-size: 16px;">Stack</a>
+            <a href="/cert" onclick="closeMobileNav()" class="nav-link" style="font-size: 16px;">Certifications</a>
+            <a href="/github" onclick="closeMobileNav()" class="nav-link" style="font-size: 16px;">GitHub</a>
 
             <div class="sidebar-divider"></div>
 
@@ -278,7 +286,7 @@
 
             <!-- Breadcrumb / Back Link -->
             <div style="padding-top: 3.5rem; padding-bottom: 0.5rem;">
-                <a href="index.html" class="font-mono"
+                <a href="/" class="font-mono"
                     style="display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: rgb(var(--g500));">
                     <span>←</span> Back to Overview
                 </a>
@@ -499,6 +507,73 @@
                     close</span>
             </div>
         </div>
+    </div>
+
+    <!-- ========================================================================
+         Interactive Typing Speed Test Overlay (⌘J / Alt+J)
+         ======================================================================== -->
+    <div id="typingOverlay" role="dialog" aria-modal="true" aria-label="Typing test modal">
+      <div class="tt-backdrop" onclick="closeTyping()"></div>
+      <div class="tt-content">
+        <!-- Live Metrics Header -->
+        <div class="tt-stats">
+          <div class="tt-stat">
+            <span class="tt-stat-val"><span id="ttWpm">0</span></span>
+            <span class="tt-stat-label">wpm</span>
+          </div>
+          <div class="tt-stat">
+            <span class="tt-stat-val"><span id="ttAcc">100</span><i>%</i></span>
+            <span class="tt-stat-label">acc</span>
+          </div>
+          <div class="tt-stat">
+            <span class="tt-stat-val"><span id="ttTime">0</span><i>s</i></span>
+            <span class="tt-stat-label">time</span>
+          </div>
+        </div>
+  
+        <!-- Words Passage -->
+        <div class="tt-words-wrap">
+          <div class="tt-words" id="ttWords"></div>
+        </div>
+  
+        <!-- Interactive On-Screen Virtual Keyboard -->
+        <div class="tt-keyboard" id="ttKeyboard"></div>
+  
+        <!-- Footer Hints -->
+        <div class="font-mono" style="font-size: 11px; color: rgb(var(--g400)); display: flex; gap: 1.5rem;">
+          <span><kbd
+              style="padding: 1px 6px; border: 1px solid rgb(var(--g300)); border-radius: 4px; background: rgb(var(--g100));">tab</kbd>
+            restart</span>
+          <span><kbd
+              style="padding: 1px 6px; border: 1px solid rgb(var(--g300)); border-radius: 4px; background: rgb(var(--g100));">esc</kbd>
+            close</span>
+        </div>
+  
+        <!-- Completion Results Scorecard -->
+        <div class="tt-results">
+          <div style="text-align: center;">
+            <span class="tt-res-wpm" id="ttResWpm">0</span>
+            <div class="font-mono"
+              style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.15em; color: rgb(var(--g400)); margin-top: 4px;">
+              Words per minute</div>
+          </div>
+          <div class="tt-res-grid">
+            <div>
+              <b><span id="ttResAcc">100</span><i>%</i></b>
+              <label>accuracy</label>
+            </div>
+            <div>
+              <b><span id="ttResRaw">0</span></b>
+              <label>raw wpm</label>
+            </div>
+            <div>
+              <b><span id="ttResTime">0</span><i>s</i></b>
+              <label>time elapsed</label>
+            </div>
+          </div>
+          <button type="button" class="tt-restart" onclick="ttRestart()">↻ Try again</button>
+        </div>
+      </div>
     </div>
 
     <!-- Generic Modal (Email) -->

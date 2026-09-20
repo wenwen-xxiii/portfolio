@@ -1174,7 +1174,7 @@
     updateTotalVisitsUi();
 
     // 2. Real-time Live Visitors simulation (natural fluctuation 6 - 12)
-    let currentLive = 0;
+    let currentLive = Math.floor(Math.random() * 7) + 6;
     const colors = ['#6366f1', '#10b981', '#f59e0b', '#ec4899', '#3b82f6', '#8b5cf6', '#14b8a6', '#f43f5e'];
 
     function updateLiveUi() {
