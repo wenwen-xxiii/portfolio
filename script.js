@@ -1158,7 +1158,18 @@
 
     // 2. Real-time Live Visitors + Total via /api/visitors heartbeat
     let currentLive = 1;
-    const sessionId = Math.random().toString(36).slice(2) + Date.now().toString(36);
+    // Reuse the same session ID across refreshes / tab navigations so the
+    // server doesn't count every page load as a brand-new visitor.
+    let sessionId;
+    try {
+      sessionId = sessionStorage.getItem('visitor_sid');
+      if (!sessionId) {
+        sessionId = Math.random().toString(36).slice(2) + Date.now().toString(36);
+        sessionStorage.setItem('visitor_sid', sessionId);
+      }
+    } catch (e) {
+      sessionId = Math.random().toString(36).slice(2) + Date.now().toString(36);
+    }
 
     function updateLiveUi() {
       document.querySelectorAll('[data-live-visitors]').forEach(el => {
