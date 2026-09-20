@@ -830,10 +830,6 @@
       input.setAttribute('readonly', 'true');
       if (caret) caret.style.display = 'none';
 
-      // Open the tab NOW — synchronously inside the user-gesture context
-      // (must happen before any await or browsers will block it as a popup)
-      const searchWin = window.open('', '_blank');
-
       if (bubble && bubbleText) {
         bubbleText.textContent = q;
         bubble.classList.add('is-on');
@@ -854,10 +850,8 @@
       Sound.play('success');
       await sleep(1800);
 
-      // Navigate the pre-opened tab to the search results
-      if (searchWin) {
-        searchWin.location.href = `https://www.google.com/search?q=${encodeURIComponent(q)}`;
-      }
+      // Open Google search only after the full animation completes
+      window.open(`https://www.google.com/search?q=${encodeURIComponent(q)}`, '_blank');
       close();
     }
 
@@ -1147,68 +1141,86 @@
      ========================================================================== */
   function initVisitorStats() {
     const TOTAL_VISITS_KEY = 'site_total_visits_v1';
-    const SESSION_KEY = 'site_session_counted';
-    const BASE_VISITS = 0; // Authentic base starting count
 
-    // 1. Calculate & record Total Visits
-    let totalVisits = BASE_VISITS;
+    // 1. Load local total as a baseline (survives server cold starts)
+    let totalVisits = 0;
     try {
       const stored = localStorage.getItem(TOTAL_VISITS_KEY);
-      if (stored) {
-        totalVisits = parseInt(stored, 10) || BASE_VISITS;
-      }
-      if (!sessionStorage.getItem(SESSION_KEY)) {
-        sessionStorage.setItem(SESSION_KEY, '1');
-        totalVisits += 1;
-        localStorage.setItem(TOTAL_VISITS_KEY, totalVisits.toString());
-      }
+      if (stored) totalVisits = parseInt(stored, 10) || 0;
     } catch (e) { }
 
-    // Update all Total Visits displays in the DOM
     function updateTotalVisitsUi() {
-      const formatted = totalVisits.toLocaleString();
       document.querySelectorAll('[data-total-visits]').forEach(el => {
-        el.textContent = formatted;
+        el.textContent = totalVisits.toLocaleString();
       });
     }
     updateTotalVisitsUi();
 
-    // 2. Real-time Live Visitors simulation (natural fluctuation 6 - 12)
-    let currentLive = Math.floor(Math.random() * 7) + 6;
-    const colors = ['#6366f1', '#10b981', '#f59e0b', '#ec4899', '#3b82f6', '#8b5cf6', '#14b8a6', '#f43f5e'];
+    // 2. Real-time Live Visitors + Total via /api/visitors heartbeat
+    let currentLive = 1;
+    const sessionId = Math.random().toString(36).slice(2) + Date.now().toString(36);
 
     function updateLiveUi() {
       document.querySelectorAll('[data-live-visitors]').forEach(el => {
         el.textContent = currentLive;
       });
-      document.querySelectorAll('[data-presence-more]').forEach(el => {
-        const extra = Math.max(1, currentLive - 3);
-        el.textContent = `+${extra}`;
+      
+      // Update dynamic avatars based on live count
+      const maxAvatars = Math.min(3, currentLive);
+      const extra = Math.max(0, currentLive - maxAvatars);
+      
+      document.querySelectorAll('[data-presence-avatars]').forEach(container => {
+        // Only re-render if count changed to avoid flickering
+        if (container.dataset.count == maxAvatars && container.dataset.extra == extra) return;
+        
+        let html = '';
+        const baseMargin = -4; // pixels
+        
+        for (let i = 0; i < maxAvatars; i++) {
+          // Use a deterministic "random" profile image (1 to 3) based on session/index
+          const profileNum = ((sessionId.charCodeAt(i % sessionId.length) + i) % 3) + 1;
+          const marginLeft = i === 0 ? baseMargin : -8;
+          html += `<img src="assets/images/profile${profileNum}.webp" alt="visitor" style="width:24px;height:24px;border-radius:50%;object-fit:cover;border:2px solid rgb(var(--bg));margin-left:${marginLeft}px;">`;
+        }
+        
+        if (extra > 0) {
+          html += `<span class="presence-more" data-presence-more>+${extra}</span>`;
+        }
+        
+        container.innerHTML = html;
+        container.dataset.count = maxAvatars;
+        container.dataset.extra = extra;
       });
     }
 
-    // Natural fluctuation every 4-8 seconds
-    function scheduleNextLiveChange() {
-      const delay = Math.floor(Math.random() * 4000) + 4000;
-      setTimeout(() => {
-        // Delta of -1, 0, or +1 with slight bias toward staying between 6 and 14
-        const delta = Math.random() < 0.48 ? 1 : (Math.random() < 0.5 ? -1 : 0);
-        currentLive = Math.max(5, Math.min(15, currentLive + delta));
-        updateLiveUi();
-        scheduleNextLiveChange();
-      }, delay);
+    // Only call the visitor API on production (Vercel), skip on localhost
+    const isProduction = !['localhost', '127.0.0.1'].includes(location.hostname);
+
+    async function sendHeartbeat() {
+      if (!isProduction) return;
+      
+      try {
+        const res = await fetch(`/api/visitors?sid=${sessionId}`, { cache: 'no-store' });
+        if (!res.ok) return;
+        
+        const data = await res.json();
+        if (typeof data.live === 'number') {
+          currentLive = data.live;
+          updateLiveUi();
+        }
+        if (typeof data.total === 'number' && data.total > totalVisits) {
+          totalVisits = data.total;
+          try { localStorage.setItem(TOTAL_VISITS_KEY, totalVisits.toString()); } catch (e) { }
+          updateTotalVisitsUi();
+        }
+      } catch (e) {
+        // Network error
+      }
     }
 
     updateLiveUi();
-    scheduleNextLiveChange();
-
-    // Cross-tab sync for total visits
-    window.addEventListener('storage', (e) => {
-      if (e.key === TOTAL_VISITS_KEY && e.newValue) {
-        totalVisits = parseInt(e.newValue, 10) || totalVisits;
-        updateTotalVisitsUi();
-      }
-    });
+    sendHeartbeat();
+    setInterval(sendHeartbeat, 30000);
   }
 
 })();
