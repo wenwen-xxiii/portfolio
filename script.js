@@ -1105,7 +1105,7 @@
     // Update count headline
     const countEl = document.getElementById('ghCommitCount');
     if (countEl) {
-      if (year === 'last') countEl.innerHTML = '<b style="font-size: 1.35rem; color: rgb(var(--ink)); font-weight: 700;">1,019</b> contributions in the last year';
+      if (year === 'last') countEl.innerHTML = '<b style="font-size: 1.35rem; color: rgb(var(--ink)); font-weight: 700;">1,024</b> contributions in the last year';
       else if (year === '2026') countEl.innerHTML = '<b style="font-size: 1.35rem; color: rgb(var(--ink)); font-weight: 700;">342</b> contributions in 2026';
       else if (year === '2025') countEl.innerHTML = '<b style="font-size: 1.35rem; color: rgb(var(--ink)); font-weight: 700;">677</b> contributions in 2025';
       else if (year === '2024') countEl.innerHTML = '<b style="font-size: 1.35rem; color: rgb(var(--ink)); font-weight: 700;">128</b> contributions in 2024';
@@ -1114,6 +1114,98 @@
 
     initGithubGraph();
   };
+
+  async function fetchGitHubData() {
+    try {
+      const userRes = await fetch('https://api.github.com/users/wenwen-xxiii');
+      if (userRes.ok) {
+        const user = await userRes.json();
+        
+        const avatarEl = document.getElementById('gh-avatar');
+        if (avatarEl) avatarEl.src = user.avatar_url;
+        
+        const nameEl = document.getElementById('gh-name');
+        if (nameEl) nameEl.textContent = user.name || user.login;
+        
+        const followersEl = document.getElementById('gh-followers');
+        if (followersEl) followersEl.textContent = user.followers;
+        
+        const followingEl = document.getElementById('gh-following');
+        if (followingEl) followingEl.textContent = user.following;
+        
+        const reposEl = document.getElementById('gh-repos');
+        if (reposEl) reposEl.textContent = user.public_repos;
+      }
+
+      const reposRes = await fetch('https://api.github.com/users/wenwen-xxiii/repos?sort=updated');
+      if (reposRes.ok) {
+        const repos = await reposRes.json();
+        const gridEl = document.getElementById('gh-repos-grid');
+        if (gridEl) {
+          // Filter out forks if you want, or just take the top 2 recently updated repos
+          const topRepos = repos.slice(0, 2);
+          
+          const languageColors = {
+            'Python': '#3572A5',
+            'JavaScript': '#f1e05a',
+            'TypeScript': '#3178c6',
+            'HTML': '#e34c26',
+            'CSS': '#563d7c',
+            'PHP': '#4F5D95',
+            'Vue': '#41b883',
+            'C++': '#f34b7d',
+            'C#': '#178600',
+            'Java': '#b07219',
+            'Rust': '#dea584',
+            'Go': '#00ADD8',
+            'Shell': '#89e051'
+          };
+          
+          let gridHtml = '';
+          for (const repo of topRepos) {
+            const langColor = repo.language && languageColors[repo.language] ? languageColors[repo.language] : '#8b949e';
+            const langPill = repo.language ? `
+                <span style="display: inline-flex; align-items: center; gap: 5px;">
+                  <span style="width: 10px; height: 10px; border-radius: 50%; background: ${langColor};"></span>
+                  ${repo.language}
+                </span>` : '';
+                
+            gridHtml += `
+            <a href="${repo.html_url}" target="_blank" rel="noopener" class="gh-repo-card">
+              <div>
+                <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px;">
+                  <span class="gh-repo-title">${repo.name}</span>
+                  <span class="gh-badge-public">${repo.visibility.charAt(0).toUpperCase() + repo.visibility.slice(1)}</span>
+                </div>
+              </div>
+              <div style="display: flex; align-items: center; gap: 1rem; margin-top: 1.5rem; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif; font-size: 12px; color: rgb(var(--g500));">
+                ${langPill}
+                <span style="display: inline-flex; align-items: center; gap: 4px;">
+                  <svg viewBox="0 0 16 16" fill="currentColor" style="width: 13px; height: 13px; color: rgb(var(--g400));">
+                    <path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z" />
+                  </svg>
+                  ${repo.stargazers_count}
+                </span>
+                <span style="display: inline-flex; align-items: center; gap: 4px;">
+                  <svg viewBox="0 0 16 16" fill="currentColor" style="width: 13px; height: 13px; color: rgb(var(--g400));">
+                    <path d="M5 5.372v.878c0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75v-.878a2.25 2.25 0 1 1 1.5 0v.878a2.25 2.25 0 0 1-2.25 2.25h-1.5v2.128a2.251 2.251 0 1 1-1.5 0V8.5h-1.5A2.25 2.25 0 0 1 5 6.25v-.878a2.25 2.25 0 1 1 1.5 0ZM5 3.25a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Zm6.75.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm-3 8.75a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Z" />
+                  </svg>
+                  ${repo.forks_count}
+                </span>
+              </div>
+            </a>`;
+          }
+          gridHtml += ``;
+          gridEl.innerHTML = gridHtml;
+        }
+      }
+
+      // Removing real-time heatmap fetch due to strict CORS and proxy rate-limits.
+      // Reverting to the beautifully simulated heatmap.
+    } catch (err) {
+      console.error('Error fetching GitHub API data:', err);
+    }
+  }
 
   /* ==========================================================================
      DOM Ready Bootstrapper
@@ -1125,6 +1217,7 @@
     initGazeCanvas();
     TypingTest.init();
     Ask.init();
+    if (document.getElementById('gh-avatar')) fetchGitHubData();
     initGithubGraph();
 
     // Adjust shortcut modifier for Mac vs Windows / Linux
