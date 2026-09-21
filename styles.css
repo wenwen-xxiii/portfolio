@@ -412,16 +412,20 @@ html.theme-anim *::after {
 #mobileNav {
   position: fixed;
   inset: 0;
-  z-index: 60;
+  z-index: 120;
   display: none;
   flex-direction: column;
   background-color: rgb(var(--bg));
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transform: translateY(-8px);
+  transition: opacity 0.25s ease, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 #mobileNav.is-open {
   opacity: 1;
+  transform: translateY(0);
 }
 
 /* ==========================================================================
@@ -1818,4 +1822,214 @@ html.dark .project-item:hover {
   color: rgb(var(--bg));
   border-color: rgb(var(--ink));
 }
+
+/* ==========================================================================
+   Comprehensive Mobile Layout Adjustments (Viewport <= 640px)
+   ========================================================================== */
+
+@media (max-width: 640px) {
+  /* Container inner padding */
+  .container-inner {
+    padding-inline: 1rem;
+  }
+
+  /* Mobile Header compact spacing */
+  .mobile-header-inner {
+    padding: 0.75rem 1rem;
+  }
+
+  /* 3D Spotlight Deck - ensure proper fit on small screens */
+  .deck {
+    height: 22.5rem;
+    overflow-x: hidden;
+  }
+
+  .deck-card {
+    width: min(18rem, 86vw);
+    margin-left: calc(-1 * min(9rem, 43vw));
+    padding: 1.15rem;
+  }
+
+  .deck-card.is-left {
+    transform: translateX(-36%) translateY(12px) rotate(-9deg) scale(0.88);
+  }
+
+  .deck-card.is-right {
+    transform: translateX(36%) translateY(12px) rotate(9deg) scale(0.88);
+  }
+
+  /* Experience list rows on index page */
+  [id="experience"] div[style*="grid-template-columns: 5.5rem"] {
+    grid-template-columns: 1fr auto !important;
+    row-gap: 0.35rem;
+  }
+
+  [id="experience"] div[style*="grid-template-columns: 5.5rem"] span:first-child {
+    grid-column: 1 / -1;
+    font-size: 11px;
+  }
+
+  /* Projects Feed Item */
+  .project-item {
+    padding: 1.15rem 1rem;
+    border-radius: 1rem;
+  }
+
+  .project-top-row {
+    flex-direction: column;
+    gap: 0.85rem;
+  }
+
+  .project-logo-box {
+    width: 44px;
+    height: 44px;
+  }
+
+  .project-desc {
+    font-size: 13px;
+  }
+
+  /* Typing overlay on mobile screens */
+  #typingOverlay {
+    padding: 1rem 0.75rem;
+  }
+
+  .tt-stats {
+    gap: 1.25rem;
+  }
+
+  .tt-stat-val {
+    font-size: 1.35rem;
+  }
+
+  .tt-words {
+    font-size: 1.15rem;
+    line-height: 1.85rem;
+    min-height: 4rem;
+  }
+
+  /* Virtual keyboard adaptation */
+  .tt-keyboard {
+    gap: 0.25rem;
+    max-width: 100%;
+    overflow-x: auto;
+    padding-bottom: 4px;
+  }
+
+  .tt-krow {
+    gap: 0.25rem;
+  }
+
+  .tt-key {
+    min-width: 1.75rem;
+    height: 2rem;
+    padding: 0 0.25rem;
+    font-size: 10px;
+    border-radius: 0.4rem;
+  }
+
+  .tt-key.space {
+    min-width: 8rem;
+  }
+
+  .tt-res-wpm {
+    font-size: 3.5rem;
+  }
+
+  .tt-res-grid {
+    gap: 1.25rem;
+  }
+
+  .tt-res-grid b {
+    font-size: 1.2rem;
+  }
+
+  /* Ask Anything Overlay */
+  #askOverlay {
+    padding: 1rem;
+    align-items: flex-start;
+    padding-top: 4rem;
+  }
+
+  .ask-content {
+    padding-left: 0;
+    gap: 1rem;
+  }
+
+  .ask-title {
+    font-size: 1.6rem;
+    white-space: normal;
+    word-break: break-word;
+  }
+
+  .ask-field {
+    font-size: 1.1rem;
+    max-width: 100%;
+  }
+
+  .ask-bubble {
+    max-width: 95vw;
+    margin-left: 0;
+  }
+
+  /* Modal Panels */
+  .modal-panel {
+    padding: 1.25rem 1.1rem;
+    border-radius: 1rem;
+    margin-inline: 0.5rem;
+  }
+
+  /* Certifications grid */
+  .cert-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .cert-card {
+    min-height: auto;
+    padding: 1.25rem 1rem;
+  }
+
+  /* GitHub Module Controls */
+  .gh-ctrl-group {
+    flex-wrap: wrap;
+  }
+
+  .gh-ctrl-btn {
+    font-size: 10px;
+    padding: 3px 6px;
+  }
+
+  .gh-activity-card {
+    padding: 1rem 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Ultra-small phones */
+  .project-badges {
+    gap: 4px;
+  }
+
+  .badge-pill-bracket,
+  .badge-pill-subtle {
+    font-size: 8.5px;
+    padding: 2px 8px;
+  }
+
+  .cert-link-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Timeline adjustments */
+  .exp-company-name {
+    font-size: 16px;
+  }
+
+  .exp-role-title {
+    font-size: 14px;
+  }
+}
+
 
