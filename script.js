@@ -1319,7 +1319,7 @@
           currentLive = data.live;
           updateLiveUi();
         }
-        if (typeof data.total === 'number' && data.total > totalVisits) {
+        if (typeof data.total === 'number') {
           totalVisits = data.total;
           try { localStorage.setItem(TOTAL_VISITS_KEY, totalVisits.toString()); } catch (e) { }
           updateTotalVisitsUi();
