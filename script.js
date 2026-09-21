@@ -953,7 +953,7 @@
   /* ==========================================================================
      9. GitHub Activity Halftone Matrix Generator (1,019 commits profile)
      ========================================================================== */
-  function initGithubGraph() {
+  window.initGithubGraph = function initGithubGraph() {
     const svg = document.getElementById('githubGraph');
     if (!svg) return;
 
