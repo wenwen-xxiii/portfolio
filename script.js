@@ -1235,12 +1235,20 @@
   function initVisitorStats() {
     const TOTAL_VISITS_KEY = 'site_total_visits_v1';
 
-    // 1. Load local total as a baseline (survives server cold starts)
+    const isProduction = !['localhost', '127.0.0.1'].includes(location.hostname);
     let totalVisits = 0;
-    try {
-      const stored = localStorage.getItem(TOTAL_VISITS_KEY);
-      if (stored) totalVisits = parseInt(stored, 10) || 0;
-    } catch (e) { }
+    
+    if (isProduction) {
+      try {
+        const stored = localStorage.getItem(TOTAL_VISITS_KEY);
+        if (stored) totalVisits = parseInt(stored, 10) || 0;
+      } catch (e) { }
+    } else {
+      // Deterministic total visits for local development so multiple browsers match perfectly.
+      // E.g., baseline of 32 plus 1 visit every ~2 hours since a specific date
+      const baseDate = 1714521600000; 
+      totalVisits = 32 + Math.floor((Date.now() - baseDate) / (1000 * 60 * 60 * 2));
+    }
 
     function updateTotalVisitsUi() {
       document.querySelectorAll('[data-total-visits]').forEach(el => {
@@ -1298,7 +1306,6 @@
     }
 
     // Only call the visitor API on production (Vercel), skip on localhost
-    const isProduction = !['localhost', '127.0.0.1'].includes(location.hostname);
 
     async function sendHeartbeat() {
       if (!isProduction) return;
