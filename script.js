@@ -1234,21 +1234,19 @@
      ========================================================================== */
   function initVisitorStats() {
     const TOTAL_VISITS_KEY = 'site_total_visits_v1';
-
     const isProduction = !['localhost', '127.0.0.1'].includes(location.hostname);
-    let totalVisits = 0;
+
+    const BASE_TOTAL_VISITS = 7; // Preserved baseline visits count
+    let totalVisits = BASE_TOTAL_VISITS;
     
-    if (isProduction) {
-      try {
-        const stored = localStorage.getItem(TOTAL_VISITS_KEY);
-        if (stored) totalVisits = parseInt(stored, 10) || 0;
-      } catch (e) { }
-    } else {
-      // Deterministic total visits for local development so multiple browsers match perfectly.
-      // E.g., baseline of 32 plus 1 visit every ~2 hours since a specific date
-      const baseDate = 1714521600000; 
-      totalVisits = 32 + Math.floor((Date.now() - baseDate) / (1000 * 60 * 60 * 2));
-    }
+    try {
+      const stored = localStorage.getItem(TOTAL_VISITS_KEY);
+      if (stored) {
+        totalVisits = Math.max(totalVisits, parseInt(stored, 10) || 0);
+      } else {
+        localStorage.setItem(TOTAL_VISITS_KEY, totalVisits.toString());
+      }
+    } catch (e) { }
 
     function updateTotalVisitsUi() {
       document.querySelectorAll('[data-total-visits]').forEach(el => {
@@ -1305,8 +1303,7 @@
       });
     }
 
-    // Only call the visitor API on production (Vercel), skip on localhost
-
+    // Call visitor API on production
     async function sendHeartbeat() {
       if (!isProduction) return;
       
@@ -1320,14 +1317,28 @@
           updateLiveUi();
         }
         if (typeof data.total === 'number') {
-          totalVisits = data.total;
-          try { localStorage.setItem(TOTAL_VISITS_KEY, totalVisits.toString()); } catch (e) { }
-          updateTotalVisitsUi();
+          // Only update and store if greater than current visits (never decrease on cold restart)
+          if (data.total > totalVisits) {
+            totalVisits = data.total;
+            try { localStorage.setItem(TOTAL_VISITS_KEY, totalVisits.toString()); } catch (e) { }
+            updateTotalVisitsUi();
+          }
         }
       } catch (e) {
         // Network error
       }
     }
+
+    // Sync across tabs
+    window.addEventListener('storage', (e) => {
+      if (e.key === TOTAL_VISITS_KEY && e.newValue) {
+        const val = parseInt(e.newValue, 10);
+        if (val && val > totalVisits) {
+          totalVisits = val;
+          updateTotalVisitsUi();
+        }
+      }
+    });
 
     updateLiveUi();
     sendHeartbeat();

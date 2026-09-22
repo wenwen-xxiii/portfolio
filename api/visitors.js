@@ -4,7 +4,7 @@
 
 const visitors = new Map();    // sessionId -> lastHeartbeat timestamp
 const seenSessions = new Set(); // all unique session IDs ever seen
-let totalVisits = 0;
+let totalVisits = 7;
 const TIMEOUT = 60000; // 60 seconds before a visitor is considered gone
 
 function cleanup() {
